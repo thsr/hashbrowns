@@ -1,77 +1,56 @@
 <template>
-<div id="search-results-c">
 
-<div class="hero">
-  <div class="hero-body">
-    
-    <div class="container">
-  
-      <div class="columns">
-        <div class="column is-half is-offset-one-quarter has-text-centered">
 
-          <search-field :searchedHashtag="$route.params.tag"></search-field>
 
+<div class="container container-regular-page my-5">
+    <div class="row align-items-top justify-content-left">
+
+        <div class="col-md-6 offset-md-3 text-center">
+            <search-field :searchedHashtag="$route.params.tag"></search-field>
         </div>
-      </div>
+
+        <div class="w-100"></div>
+
+        <div v-if="loading" class="col-12 text-center">
+            <i class="fa fa-circle-o-notch fa-spin fa-2x"></i>
+        </div>
+
+        <div v-if="error" class="col-12 text-center">
+          {{error}}
+        </div>
+
+        <div v-if="searchResult" class="col-12">
+          <div class="col-md-12 text-center">
+              <div v-if="searchResult.data.length > 0 && listOfSelected.length < 1" class="text-center">
+                <button type="button" class="btn btn-primary" disabled style="opacity: 0;">Copy selection</button>
+              </div>
+              <div v-else-if="listOfSelected.length > 0" class="text-center">
+                <b-btn id="copySelected" v-clipboard:copy="listOfSelectedCopiable" v-clipboard:success="onCopy" variant="primary">Copy selection ({{listOfSelected.length}}) to clipboard</b-btn>
+                <b-tooltip disabled :show.sync="isCopied" target="copySelected" placement="top">Copied!</b-tooltip>
+              </div>
+          </div>
+          
+          
+          <div class="col-md-12">
+              <div id="searchresults" class="row mt-5 align-items-center">
+                  <div class="col-6 col-md-4 my-2 text-center searchresults-tag" v-for="tag in searchResult.data">
+                    <a @click="tag.isSelected = !tag.isSelected" href="javascript:;" class="pb-1" :class="{'is-selected': tag.isSelected}">#{{tag.text}}</a>
+                  </div>
+                </div>
+          </div>
+        </div>
 
     </div>
-
-  </div>
 </div>
 
-<section>
-  <div class="container">
-
-    <div class="columns">
-      <div id="taglist" class="column">
-
-        <ul v-if="loading" class="loading">
-              <span class="icon is-small">
-                <i class="fa fa-circle-o-notch fa-spin"></i>
-              </span>
-        </ul>
-
-        <ul v-if="error" class="error">
-          <li>{{error}}</li>
-        </ul>
-
-        <ul v-if="searchResult">
-          <li v-for="tag in searchResult.data" :class="{'selected': tag.isSelected}">
-            <a href="javascript:;" v-on:click="tag.isSelected = !tag.isSelected">#{{tag.text}}</a>
-          </li>
-        </ul>
-
-
-      </div>
-    </div>
-
-    <div v-if="searchResult" class="columns">
-      <div id="resultcontrols" class="column">
-        <ul>
-          <li v-if="searchResult.data.length > 0 && listOfSelected.length < 1">
-            select some tags to copy them to clipboard
-          </li>
-          <li v-else-if="listOfSelected.length > 0" class="selected">
-            <a href="javascript:;" v-clipboard:copy="listOfSelectedCopiable" v-clipboard:success="onCopy">copy {{listOfSelected.length}} selected to clipboard</a>
-          </li>
-
-          <transition name="fade">
-            <li v-if="isCopied">
-              copied
-              <span class="icon is-small">
-                <i class="fa fa-check fa-fw"></i>
-              </span>
-            </li>
-          </transition>
-
-        </ul>
-      </div>
-    </div>
-
-  </div>
-</section>
-
 </div>
+
+
+
+
+
+
+
 </template>
 
 <script>
@@ -84,7 +63,9 @@ export default {
       loading: false,
       searchResult: {data: []},
       error: {},
-      isCopied: false
+      isCopied: false,
+      //tmp
+      show: true
     }
   },
 
@@ -138,30 +119,19 @@ export default {
           this.$Progress.finish()
 
           if (res.data.data.length == 0) {
-
             this.throwError('no hashtags found :(')
-
-            dataLayer.push({
-              event: 'hashtag_search',
-              category: 'hashtag_search-nofound',
-              action: this.$route.params.tag,
-              label: ''
-            })
-
           } else {
-
             this.searchResult.data = res.data.data.map( o => {
               return { text: o.text, isSelected: false } 
             })
-
-            dataLayer.push({
-              event: 'hashtag_search',
-              category: 'hashtag_search-success',
-              action: this.$route.params.tag,
-              label: res.data.data.length.toString()
-            })
-
           }
+
+          dataLayer.push({
+            event: 'hashtag_search',
+            category: 'hashtag_search-success',
+            action: this.$route.params.tag,
+            label: res.data.data.length.toString()
+          })
 
         })
         .catch( (error) => {
@@ -183,8 +153,13 @@ export default {
       this.isCopied = true;
       setTimeout( () => {
         this.isCopied = false;
-      }, 1700);
+      }, 1000);
     }
   }
 }
 </script>
+
+<style>
+
+
+</style>

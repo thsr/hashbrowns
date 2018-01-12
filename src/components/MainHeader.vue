@@ -3,41 +3,24 @@
 ===============================-->
 
 <template>
-<div id="main-header-c">
 
-<section>
-  <div class="container">
-
-    <div class="columns is-mobile is-gapless">
-      <div class="column logo">
-        <ul>
-          <router-link tag="li" :to="{ path: '/' }">
-            <a href="javascript:;"><span class="logo1">hashbrowns</span><span class="logo2">.cc</span></a>
-          </router-link>
+<nav class="navbar navbar-expand-lg navbar-light" style="background: transparent;">
+    <router-link :to="{ path: '/' }" class="navbar-brand" href="#"><span class="logo1">hashbrowns</span><span class="logo2">.cc</span></router-link>
+    <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-md-end" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <router-link :to="{ path: '/search' }" class="nav-link" href="javascript:;">Search</router-link>
+            </li>
+            <li class="nav-item">
+                <router-link :to="{ path: '/about' }" class="nav-link" href="javascript:;">About</router-link>
+            </li>
         </ul>
-      </div>
-
-      <div class="column menu has-text-right">
-        <ul>
-          <router-link tag="li" :to="{ path: '/about' }">
-            <a href="javascript:;">
-              <span class="is-hidden-mobile">about</span>
-              <span class="icon is-hidden-tablet">
-                <i class="fa fa-info"></i>
-              </span>
-            </a>
-          </router-link>
-        </ul>
-      </div>
     </div>
+</nav>
 
-  </div>
-</section>
-
-
-
-
-</div>
 </template>
 
 

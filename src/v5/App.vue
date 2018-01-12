@@ -100,15 +100,18 @@
         </div> -->
 
         <div class="col-md-12 text-center">
-          <a href="#" class="btn btn-primary">Copy to clipboard</a>
+            <div class="text-center mt-5">
+              <b-btn id="tooltipButton-1" @click="show = !show" variant="primary">Copy selection (5) to clipboard</b-btn>
+              <b-tooltip disabled :show.sync="show" target="tooltipButton-1" placement="top" delay="1">Copied!</b-tooltip>
+            </div>
         </div>
 
 
         <div class="col-md-12">
-            <div id="searchresults" class="row mt-5">
+            <div id="searchresults" class="row mt-5 align-items-center">
                 <div class="col-6 col-md-4 text-center my-2 searchresults-tag" v-for="(tag, index) in tags">
                   <a href="javascript:;" class="pb-1">#{{tag}}</a>
-                </div><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+                </div>
               </div>
         </div>
 
@@ -124,6 +127,7 @@ export default {
   name: 'app',
   data () {
     return {
+      show: true,
       name: '',
       tags: ["food", "foodporn", "yummy", "foodie", "dinner", "cook", "instafood", "chef", "foodstagram", "delicious", "instagood", "repost", "foodgasm", "healthyfood", "foodlover", "follow4follow", "foodpics", "homemade", "foodphotography", "selfie", "photographyphotographyphotography", "ps4", "love", "model", "healthy", "bodybuilding"]
     };

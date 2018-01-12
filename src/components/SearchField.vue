@@ -3,46 +3,25 @@
 ===============================-->
 
 <template>
-<div id="search-field-c">
-  
+
+
+<div id="searchfield" class="mb-5">
 <form  @submit.prevent="submitForm" action>
-  <div class="field">
-
-    <p class="control has-icons-left has-icons-right">
-      <input class="input is-large"
-             v-model="searchTerm"
-             name="searchTerm"
-             v-validate="{ rules: { specialChars: true } }"
-             :class="{'input': true, 'is-large': true, 'is-danger': errors.has('searchTerm') }" 
-             type="text"
-             :placeholder="searchedHashtag"
-             v-focus="focused"
-             @focus="focused = true"
-             @blur="focused = false">
-
-      <span class="icon is-left">
-        <i class="fa fa-hashtag"></i>
-      </span>
-
-      <span class="icon is-right" v-show="errors.has('searchTerm')">
-        <i class="fa fa-warning"></i>
-      </span>
-    </p>
-
-    <p class="help is-danger" style="margin-top: 1em;margin-left: 2em;">
-      <span v-if="errors.has('searchTerm')">
-        {{ errors.first('searchTerm') }}
-      </span>
-      <span v-else>
-        &nbsp;
-      </span>
-    </p>
-
-  </div>
+  <i class="fa fa-hashtag text-lg" aria-hidden="true"></i>
+  <b-form-input id="searchfieldInput" 
+                v-model="searchTerm"
+                name="searchTerm"
+                type="text" 
+                size="lg" 
+                :state="hasSpecialCharactersState" 
+                aria-describedby="searchfieldInputFeedback" 
+                :placeholder="searchedHashtag"></b-form-input>
+  <b-form-invalid-feedback id="searchfieldInputFeedback">
+      Hashtags can't have special characters :(
+  </b-form-invalid-feedback>
 </form>
-<!-- <span v-else id="login-prompt"><a href="/api/ig_auth/authorize_user">&rarr; login</a></span> -->
-        
 </div>
+
 </template>
 
 
@@ -67,12 +46,15 @@ export default {
   data: function () {
     return {
       searchTerm: '',
-      focused: this.initFocused
+      focused: true
     }
   },
   computed: {
     hasSpecialCharacters () {
       return /[^a-zA-Z0-9_ÂÃÄÀÁÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿ]/.test(this.searchTerm)
+    },
+    hasSpecialCharactersState () {
+      return !/[^a-zA-Z0-9_ÂÃÄÀÁÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿ]/.test(this.searchTerm) || this.name == '' ? null : false
     }
   },
   methods: {

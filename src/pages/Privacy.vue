@@ -1,14 +1,10 @@
 <template>
-<div id="privacy-c">
 
 
-<div class="hero">
-  <div class="hero-body">
-    
-    <div class="container">
-      <div class="columns">
-        <div class="column">
-          <div class="content">
+<div class="container container-regular-page">
+  <div class="row align-items-center justify-content-center">
+    <div class="col-md-12">
+
 
 
 <h1>Privacy Policy</h1>
@@ -69,16 +65,9 @@
 <h2>Contact Us</h2>
 
 <p>If you have any questions about this Privacy Policy, please contact us.</p>
-
-
-          </div>
-        </div>
-      </div>
+      
     </div>
-
   </div>
 </div>
 
-
-</div>
 </template>
