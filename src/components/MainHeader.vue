@@ -5,7 +5,7 @@
 <template>
 
 <nav class="navbar navbar-expand-lg navbar-light" style="background: transparent;">
-    <router-link :to="{ path: '/' }" class="navbar-brand" href="#"><span class="logo1">hashbrowns</span><span class="logo2">.cc</span></router-link>
+    <router-link :to="{ path: '/' }" class="navbar-brand" href="javascript:;"><span class="logo1">hashbrowns</span><span class="logo2">.cc</span></router-link>
     <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>

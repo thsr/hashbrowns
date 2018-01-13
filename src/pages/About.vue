@@ -2,7 +2,7 @@
 
 <div class="container container-regular-page">
   <div class="row align-items-center justify-content-center">
-    <div class="col-md-12">
+    <div class="col-md-6">
 
             <p>Hi,</p>
             <p>Hashbrowns.cc is a spare time project to learn Javascript using <a href="https://nodejs.org/" target="_blank">Node.js</a>, <a href="https://expressjs.com/" target="_blank">Express</a> and <a href="https://vuejs.org/" target="_blank">Vue.js</a>. My girlfriend needed an Instagram scheduling tool, so naturally I ended up building an Instagram hashtag finder (wat?).</p>
