@@ -148,7 +148,7 @@ h1.display-5
   +vendor-prefix('text-fill-color', 'transparent')
 
 .btn-brand-colours
-  background: linear-gradient(0deg, #b721ff, #21d4fd, #2af598)
+  background: linear-gradient(-45deg, #b721ff, #21d4fd, #2af598)
 
 .navbar-brand
   font-size: 1rem

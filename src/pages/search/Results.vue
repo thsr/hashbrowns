@@ -22,7 +22,7 @@
         <div v-if="searchResult" class="col-12">
           <div class="col-md-12 text-center">
               <div v-if="searchResult.data.length > 0 && listOfSelected.length < 1" class="text-center">
-                <button type="button" class="btn btn-primary" disabled style="opacity: 0;">Copy selection</button>
+                <button type="button" class="btn btn-primary" disabled>Select tags to copy to clipboard</button>
               </div>
               <div v-else-if="listOfSelected.length > 0" class="text-center">
                 <b-btn id="copySelected" v-clipboard:copy="listOfSelectedCopiable" v-clipboard:success="onCopy" variant="primary">Copy selection ({{listOfSelected.length}}) to clipboard</b-btn>
@@ -88,7 +88,7 @@ export default {
       return this.searchResult.data.filter( o => o.isSelected);
     },
     listOfSelectedCopiable () {
-      return '#' + this.$route.params.tag + ' ' + this.searchResult.data
+      return this.searchResult.data
         .filter( o => o.isSelected)
         .map( o => {
           return '#' + o.text;
@@ -121,18 +121,19 @@ export default {
           if (res.data.data.length == 0) {
             this.throwError('no hashtags found :(')
           } else {
-            this.searchResult.data = res.data.data.map( o => {
+            const originalSearchResult = [{ text: this.$route.params.tag, isSelected: true }]
+            const returnedSearchResult = res.data.data.map( o => {
               return { text: o.text, isSelected: false } 
             })
+            this.searchResult.data = originalSearchResult.concat(returnedSearchResult)
           }
 
           dataLayer.push({
             event: 'hashtag_search',
-            category: 'hashtag_search-success',
-            action: this.$route.params.tag,
-            label: res.data.data.length.toString()
+            tag_name: this.$route.params.tag,
+            nb_results: res.data.data.length.toString()
+            
           })
-
         })
         .catch( (error) => {
           this.loading = false
@@ -140,20 +141,30 @@ export default {
           this.throwError(error.response.data)
 
           dataLayer.push({
-            event: 'hashtag_search',
-            category: 'hashtag_search-error',
-            action: this.$route.params.tag,
-            label: error.response.data.toString()
+            event: 'hashtag_search_error',
+            tag_name: this.$route.params.tag,
+            error_response: error.response.data.toString()
+            
           })
         })
       }
     },
 
     onCopy () {
+      dataLayer.push({
+        event: 'hashtag_search_clipboard',
+        tag_name: this.$route.params.tag,
+        nb_results: this.searchResult.data.length.toString(),
+        nb_copied: this.listOfSelected.length.toString()
+        
+      })
+
       this.isCopied = true;
       setTimeout( () => {
         this.isCopied = false;
-      }, 1000);
+      }, 1000)
+
+
     }
   }
 }
