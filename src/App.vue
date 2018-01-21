@@ -58,9 +58,11 @@ $font-family-sans-serif: "Maison Neue", BlinkMacSystemFont, -apple-system, "Sego
 $family-monospace: "Maison Mono", monospace
 $render-mode: optimizeLegibility
 
-$primary: #6685f9
+// $primary: #6685f9
 $primary: #666
+// $primary: #2C7AB9
 $secondary: #ddd
+// $secondary: #C7E0EC
 
 $black: #000
 $verydark: #222
@@ -144,6 +146,8 @@ a:hover
 
 h1.display-5
   background: linear-gradient(-45deg, #b721ff, #21d4fd, #2af598)
+  // background: linear-gradient(-45deg, #F2E9D9, #C7E0EC, #227FC0, #FC5E5E)
+  // background: linear-gradient(-45deg, #C7E0EC, #227FC0, #FC5E5E)
   +vendor-prefix('background-clip', 'text')
   +vendor-prefix('text-fill-color', 'transparent')
 
@@ -228,6 +232,7 @@ tr
       color: $body-color
       text-decoration: none
 
-
+nav
+  z-index: 99
 
 </style>
