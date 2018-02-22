@@ -170,7 +170,18 @@ export default {
 }
 </script>
 
-<style>
+<style lang="sass">
+
+.searchresults-tag
+  .options
+    visibility: hidden
+
+.searchresults-tag:hover
+  .options
+    visibility: visible
+
+button:focus
+  outline: 0 !important
 
 
 </style>

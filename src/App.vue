@@ -83,6 +83,7 @@ $line-height-sm: 1.7
 $input-btn-focus-width: 0
 $input-focus-border-color: #ced4da
 
+
 $border-radius: .15rem
 
 =vendor-prefix($name, $value)
@@ -216,6 +217,7 @@ tr
   input
     padding-left: 3.5rem
     box-shadow: 0px 10px 51px 0px rgba(0,0,0,0.15)
+
 
 #searchresults
   font-size: ($font-size-base * 1.3)
