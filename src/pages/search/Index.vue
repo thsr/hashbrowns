@@ -3,10 +3,10 @@
 <div class="container container-full-page">
     <div class="row align-items-center justify-content-center">
         <div class="col-md-6 text-center">            
-            <h1 class="display-5">Trending Tags for your Content</h1>
+            <h1 class="display-5">Trending tags for your content</h1>
             <h2 class="lead mb-5">
-                We serve hashtags for breakfast.<br>
-                Get more&nbsp;followers. More&nbsp;likes. More&nbsp;better.
+                Get more&nbsp;followers. More&nbsp;likes. More&nbsp;better.<br>
+                We serve hashtags for breakfast.
             </h2>
 
             <search-field></search-field>
