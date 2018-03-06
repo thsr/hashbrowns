@@ -207,16 +207,21 @@ tr
   .invalid-feedback
     display: block
     visibility: hidden
-  .is-invalid+.invalid-feedback
+  .is-invalid+*+.invalid-feedback
     visibility: visible
   i
     position: absolute
-    margin: .8rem
+    margin: .9rem 1.4rem
     width: 1rem
     color: $input-placeholder-color
+    z-index: 99
   input
-    padding-left: 3.5rem
+    padding-left: 3.5rem  
     box-shadow: 0px 10px 51px 0px rgba(0,0,0,0.15)
+  button
+    border-top-left-radius: 0
+    border-bottom-left-radius: 0
+    border-left: 0
 
 
 #searchresults

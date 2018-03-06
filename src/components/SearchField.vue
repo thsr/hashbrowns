@@ -5,20 +5,31 @@
 <template>
 
 
+
+
 <div id="searchfield" class="mb-5">
+
+
+
 <form  @submit.prevent="submitForm" action>
-  <i class="fa fa-hashtag text-lg" aria-hidden="true"></i>
-  <b-form-input id="searchfieldInput" 
-                v-model="searchTerm"
-                name="searchTerm"
-                type="text" 
-                size="lg" 
-                :state="hasSpecialCharactersState" 
-                aria-describedby="searchfieldInputFeedback" 
-                :placeholder="searchedHashtag"></b-form-input>
-  <b-form-invalid-feedback id="searchfieldInputFeedback">
-      Hashtags can't have special characters :(
-  </b-form-invalid-feedback>
+
+  <b-input-group>
+    <i class="fa fa-hashtag text-lg" aria-hidden="true"></i>
+    <b-form-input id="searchfieldInput" 
+                  v-model="searchTerm"
+                  name="searchTerm"
+                  type="text" 
+                  size="lg" 
+                  :state="hasSpecialCharactersState" 
+                  aria-describedby="searchfieldInputFeedback" 
+                  :placeholder="searchedHashtag"></b-form-input>
+    <b-input-group-append>
+      <b-btn variant="outline-secondary" size="lg" text="Button" type="submit"><span class="fa fa-search fa-lg" aria-hidden="true"></span></b-btn>
+    </b-input-group-append>
+    <b-form-invalid-feedback id="searchfieldInputFeedback">
+        Hashtags can't have special characters :(
+    </b-form-invalid-feedback>
+  </b-input-group>
 </form>
 </div>
 
