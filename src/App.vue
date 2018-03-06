@@ -81,7 +81,7 @@ $line-height-lg: 1.7
 $line-height-sm: 1.7
 
 $input-btn-focus-width: 0
-$input-focus-border-color: #ced4da
+$input-focus-border-color: $medium
 
 
 $border-radius: .15rem
