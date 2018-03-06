@@ -71,8 +71,8 @@ export default {
   methods: {
     submitForm: debounce(function () {
       this.$validator.validateAll().then( (result) => {
-        if (result) {
-          this.$router.push('/search/' + this.searchTerm)
+        if (!this.hasSpecialCharacters) {
+          this.$router.push('/search/' + this.searchTerm.toLowerCase())
           this.focused = false
           return
         }
