@@ -26,10 +26,10 @@
     <b-input-group-append>
       <b-btn variant="outline-secondary" size="lg" text="Button" type="submit"><span class="fa fa-search fa-lg" aria-hidden="true"></span></b-btn>
     </b-input-group-append>
-    <b-form-invalid-feedback id="searchfieldInputFeedback">
-        Hashtags can't have special characters :(
-    </b-form-invalid-feedback>
   </b-input-group>
+  <b-form-invalid-feedback :class="{ 'invalid-feedback-visible': hasSpecialCharacters }" id="searchfieldInputFeedback">
+      Hashtags can't have special characters :(
+  </b-form-invalid-feedback>
 </form>
 </div>
 

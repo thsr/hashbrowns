@@ -207,7 +207,7 @@ tr
   .invalid-feedback
     display: block
     visibility: hidden
-  .is-invalid+*+.invalid-feedback
+  .invalid-feedback-visible
     visibility: visible
   i
     position: absolute
@@ -216,7 +216,9 @@ tr
     color: $input-placeholder-color
     z-index: 99
   input
-    padding-left: 3.5rem  
+    padding-left: 3.5rem
+  .input-group
+    border-radius: $border-radius
     box-shadow: 0px 10px 51px 0px rgba(0,0,0,0.15)
   button
     border-top-left-radius: 0
