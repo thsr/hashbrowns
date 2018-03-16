@@ -33,7 +33,7 @@
           
           <div class="col-md-12">
               <div id="searchresults" class="row mt-5 align-items-center">
-                  <div class="col-6 col-md-4 my-2 text-center searchresults-tag" v-for="tag in searchResult.data">
+                  <div class=" my-2 text-center searchresults-tag" v-for="tag in searchResult.data">
                     <a @click="tag.isSelected = !tag.isSelected" href="javascript:;" class="pb-1" :class="{'is-selected': tag.isSelected}">#{{tag.text}}</a>
                   </div>
                 </div>

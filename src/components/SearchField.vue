@@ -3,16 +3,10 @@
 ===============================-->
 
 <template>
-
-
-
-
 <div id="searchfield" class="mb-5">
 
 
-
 <form  @submit.prevent="submitForm" action>
-
   <b-input-group>
     <i class="fa fa-hashtag text-lg" aria-hidden="true"></i>
     <b-form-input id="searchfieldInput" 
@@ -31,8 +25,9 @@
       Hashtags can't have special characters :(
   </b-form-invalid-feedback>
 </form>
-</div>
 
+
+</div>
 </template>
 
 
