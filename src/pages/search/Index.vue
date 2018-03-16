@@ -3,10 +3,9 @@
 <div class="container container-full-page">
     <div class="row align-items-center justify-content-center">
         <div class="col-md-6 text-center">            
-            <h1 class="display-5">Trending tags for your content</h1>
+            <h1 class="display-5">Trending tags for your content.</h1>
             <h2 class="lead mb-5">
-                Get more&nbsp;followers. More&nbsp;likes. More&nbsp;better.<br>
-                We serve hashtags for breakfast.
+                Find hashtag ideas. Get more likes and followers.
             </h2>
 
             <search-field></search-field>
@@ -19,6 +18,19 @@
 </template>
 
 <script>
+
+/*
+Trending tags for your content
+Get more followers. More likes. More better.
+We serve hashtags for breakfast.
+
+Trending tags for your content
+Find hashtag ideas. Get more likes and followers.
+
+*/
+
+
+
 
 import SearchField from '@/components/SearchField.vue'
 
@@ -34,5 +46,5 @@ export default {
 
 <style lang="sass" scoped>
 h2.lead
-    line-height: 1.4
+  line-height: 1.4
 </style>
