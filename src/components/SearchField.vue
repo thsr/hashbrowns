@@ -3,12 +3,12 @@
 ===============================-->
 
 <template>
-<div id="searchfield" class="mb-5">
+<div id="searchfield">
 
 
 <form  @submit.prevent="submitForm" action>
   <b-input-group>
-    <i class="fa fa-hashtag text-lg" aria-hidden="true"></i>
+    <feather-icon type="hash"></feather-icon>
     <b-form-input id="searchfieldInput" 
                   v-model="searchTerm"
                   name="searchTerm"
@@ -18,7 +18,7 @@
                   aria-describedby="searchfieldInputFeedback" 
                   :placeholder="searchedHashtag"></b-form-input>
     <b-input-group-append>
-      <b-btn variant="outline-secondary" size="lg" text="Button" type="submit"><span class="fa fa-search fa-lg" aria-hidden="true"></span></b-btn>
+      <b-btn variant="outline-secondary" size="lg" text="Button" type="submit"><feather-icon type="search"></feather-icon></b-btn>
     </b-input-group-append>
   </b-input-group>
   <b-form-invalid-feedback :class="{ 'invalid-feedback-visible': hasSpecialCharacters }" id="searchfieldInputFeedback">
@@ -88,6 +88,5 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="sass">
-
 
 </style>

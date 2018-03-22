@@ -6,37 +6,125 @@
     <div class="row align-items-top justify-content-left">
 
         <div class="col-md-6 offset-md-3 text-center">
-            <search-field :searchedHashtag="$route.params.tag"></search-field>
+            <search-field :searchedHashtag="$route.params.tag" class="mb-4"></search-field>
         </div>
 
         <div class="w-100"></div>
 
-        <div v-if="loading" class="col-12 text-center">
+        <div v-if="loading" class="col-12 text-center mt-5">
             <i class="fa fa-circle-o-notch fa-spin fa-2x"></i>
         </div>
 
-        <div v-if="error" class="col-12 text-center">
+        <div v-if="error" class="col-12 text-center mt-5">
           {{error}}
         </div>
 
         <div v-if="searchResult" class="col-12">
-          <div class="col-md-12 text-center">
-              <div v-if="searchResult.data.length > 0 && listOfSelected.length < 1" class="text-center">
+          <div class="d-flex justify-content-center sticky-top pt-4">
+              <div v-if="searchResult.data.length > 0 && listOfSelected.length < 1" class="text-center mr-3">
                 <button type="button" class="btn btn-primary" disabled>Select tags to copy to clipboard</button>
               </div>
-              <div v-else-if="listOfSelected.length > 0" class="text-center">
+
+              <div v-else-if="listOfSelected.length > 0" class="text-center mr-3">
                 <b-btn id="copySelected" v-clipboard:copy="listOfSelectedCopiable" v-clipboard:success="onCopy" variant="primary">Copy selection ({{listOfSelected.length}}) to clipboard</b-btn>
                 <b-tooltip disabled :show.sync="isCopied" target="copySelected" placement="top">Copied!</b-tooltip>
+              </div>
+
+              <div class="dropdown" v-if="searchResult.data.length > 0">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="orderByDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Order by
+                </button>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="orderByDropdown">
+                  <a class="dropdown-item" @click.prevent="sortResultsHashtagAZ" href="javascript:;"><!-- <feather-icon type="bar-chart"></feather-icon>  -->Hashtag A&rarr;Z</a>
+                  <a class="dropdown-item" @click.prevent="sortResultsHashtagZA" href="javascript:;"><!-- <feather-icon type="bar-chart-reverse"></feather-icon>  -->Hashtag Z&rarr;A</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" @click.prevent="sortResultsRelevanceAsc" href="javascript:;"><!-- <feather-icon type="bar-chart"></feather-icon>  -->Relevance Lo&rarr;Hi</a>
+                  <a class="dropdown-item" @click.prevent="sortResultsRelevanceDesc" href="javascript:;"><!-- <feather-icon type="bar-chart-reverse"></feather-icon>  -->Relevance Hi&rarr;Lo</a>
+                </div>
               </div>
           </div>
           
           
           <div class="col-md-12">
-              <div id="searchresults" class="row mt-5 align-items-center">
-                  <div class=" my-2 text-center searchresults-tag" v-for="tag in searchResult.data">
-                    <a @click="tag.isSelected = !tag.isSelected" href="javascript:;" class="pb-1" :class="{'is-selected': tag.isSelected}">#{{tag.text}}</a>
+              <div id="searchresults" class="row mt-5">
+                <div class="col-md-12 py-2 searchresults-row">
+                  <div class="d-flex align-items-center">
+                    <div class="mr-5" style="width: 1.7rem; height: 1.7rem;" @click="selectAllTags">
+                      <feather-icon type="square"></feather-icon><feather-icon type="x-square"></feather-icon>
+                    </div>
                   </div>
-                </div>
+                </div>  
+                <div class="col-md-12 py-2" v-for="(tag, index) in searchResult.data" :class="{ 'searchresults-row': true, 'tag-is-selected': tag.isSelected }">
+                  <div class="d-flex align-items-center">
+
+                    <div class="mr-5" style="width: 1.7rem; height: 1.7rem;" @click="tag.isSelected = !tag.isSelected">
+                      <feather-icon v-if="!tag.isSelected" type="square"></feather-icon><feather-icon v-if="tag.isSelected" type="x-square"></feather-icon>
+                    </div>
+
+                    <div @click="tag.isSelected = !tag.isSelected" class="searchresults-tag pt-1 mr-auto">
+                      <a href="javascript:;" :class="{'is-selected': tag.isSelected}">
+                      <feather-icon type="hash"></feather-icon>{{tag.text}}</a>
+                    </div>
+
+
+
+                    <div style="width: 1.7rem; height: 1.7rem;">
+                      <div class="btn-group dropleft">
+                        <a class="dropdown-toggle" href="#" role="button" :id="'moreHorizontal'+index" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                           <feather-icon type="more-horizontal"></feather-icon>
+                        </a>
+                        <div class="dropdown-menu">
+                          <!-- <h6 class="dropdown-header">#{{tag.text.toUpperCase()}}</h6> -->
+                          <a class="dropdown-item" @click.prevent="$router.push('/search/' + tag.text)" href="javascript:;"><feather-icon type="search" class="mr-2"></feather-icon>New search with #{{tag.text}}</a>
+                          <a class="dropdown-item" :href="'https://www.instagram.com/explore/tags/'+tag.text+'/'" target="_blank"><feather-icon type="instagram" class="mr-2"></feather-icon>Lookup #{{tag.text}} on Instagram</a>
+                          <div class="dropdown-divider"></div>
+                          <!-- <span v-b-tooltip.hover title="Sign Up"><a class="dropdown-item disabled" href="javascript:;"><feather-icon type="lock" class="mr-2"></feather-icon><span style="color: transparent; text-shadow: 0 0 7px rgba(0,0,0,0.5);">12,345</span> posts</a></span> -->
+                          <span v-b-tooltip.hover title="Upgrade to access"><a class="dropdown-item disabled" href="javascript:;"><feather-icon type="lock" class="mr-2"></feather-icon>Post stats</a></span>
+                          <span v-b-tooltip.hover title="Upgrade to access"><a class="dropdown-item disabled" href="javascript:;"><feather-icon type="lock" class="mr-2"></feather-icon>Relevance score</a></span>
+                          <span v-b-tooltip.hover title="Upgrade to access"><a class="dropdown-item disabled" href="javascript:;"><feather-icon type="lock" class="mr-2"></feather-icon>Save to Hashtag Groups</a></span>
+                        </div>
+                      </div>
+                    </div>
+
+<!--                     <div style="width: 1.7rem; height: 1.7rem;">
+                      <feather-icon type="more-horizontal"></feather-icon>
+                    </div> -->
+
+                  </div>
+
+<!--                 <div class="mr-5 my-2 searchresults-tag" v-for="tag in searchResult.data"> <feather-icon v-if="!tag.isSelected" type="square"></feather-icon><feather-icon v-if="tag.isSelected" type="x-square"></feather-icon>
+                  <a @click="tag.isSelected = !tag.isSelected" href="javascript:;" class="pb-1" :class="{'is-selected': tag.isSelected}">
+                    <feather-icon type="hash" class="feather-hash"></feather-icon>{{tag.text}}</a>
+                </div> -->
+              </div>
+
+<!-- <table id="searchresults" class="table table-sm mt-5">
+  <thead>
+    <tr>
+      <th>
+        123<i data-feather="circle"></i>123
+      </th>
+      <th class="text-center" scope="col">Hashtag</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr v-for="(tag, index) in searchResult.data">
+      <td>
+        123<svg class="feather feather-activity">
+  <use xlink:href="./../node_modules/feather-icons/dist/feather-sprite.svg#activity"/>
+</svg>123
+      </td>
+      <td class="text-center py-2">
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" :id="index" v-model="tag.isSelected" href="javascript:;">
+          <label class="custom-control-label" :for="index">#{{tag.text}}</label>
+        </div>
+      </td>
+      <td class="text-center py-2">#{{tag.text}}</td>
+    </tr>
+  </tbody>
+</table> -->
+
           </div>
         </div>
 
@@ -56,6 +144,7 @@
 <script>
 import axios from 'axios'
 import SearchField from '@/components/SearchField.vue'
+import feather from 'feather-icons'
 
 export default {
   data () {
@@ -71,7 +160,6 @@ export default {
 
   mounted () {
     this.fetchData()
-
   },
 
   watch: {
@@ -94,6 +182,11 @@ export default {
           return '#' + o.text;
         })
         .join(' ')
+    },
+    isAllTagsSelected () {
+      return this.searchResult.data.filter( o => {
+        return o.isSelected
+      })
     }
   },
 
@@ -121,9 +214,9 @@ export default {
           if (res.data.data.length == 0) {
             this.throwError('no hashtags found :(')
           } else {
-            const originalSearchResult = [{ text: this.$route.params.tag, isSelected: true }]
+            const originalSearchResult = [{ text: this.$route.params.tag, isSelected: true, count: 133713371337 }]
             const returnedSearchResult = res.data.data.map( o => {
-              return { text: o.text, isSelected: false } 
+              return { text: o.text, isSelected: false, count: o.count } 
             })
             this.searchResult.data = originalSearchResult.concat(returnedSearchResult)
           }
@@ -165,23 +258,73 @@ export default {
       }, 1000)
 
 
-    }
+    },
+
+    selectAllTags () {
+      this.searchResult.data.map( o => {
+        return { text: o.text, isSelected: true, count: o.count } 
+      })
+    },
+
+
+
+    sortResultsHashtagAZ () {
+      return this.searchResult.data.sort( (a,b) => {
+        var x = a.text.toLowerCase();
+        var y = b.text.toLowerCase();
+        if (x < y) {return -1;}
+        if (x > y) {return 1;}
+        return 0;
+      })
+    },
+    sortResultsHashtagZA () {
+      return this.searchResult.data.sort( (a,b) => {
+        var x = a.text.toLowerCase();
+        var y = b.text.toLowerCase();
+        if (x < y) {return 1;}
+        if (x > y) {return -1;}
+        return 0;
+      })},
+    sortResultsRelevanceAsc () {
+      return this.searchResult.data.sort( (a,b) => {return a.count - b.count})},
+    sortResultsRelevanceDesc () {
+      return this.searchResult.data.sort( (a,b) => {return b.count - a.count})},
   }
 }
 </script>
 
-<style lang="sass">
+<style scoped lang="sass">
+.feather-hash, .feather-bar-chart, .feather-bar-chart-reverse, .feather-lock, .feather-search, .feather-instagram
+  width: 1rem
+  height: 1rem
+  stroke: currentColor
 
-.searchresults-tag
+.feather-square, .feather-x-square, .feather-more-horizontal
+  width: 1.7rem
+  height: 1.7rem
+  stroke-width: 1.76px
+  cursor: pointer
+
+.tag-is-selected
+  background: #F8F9FA
+
+.searchresults-row
+  border-bottom: 2px solid #E9ECEF
+  .dropdown-toggle::after, .dropdown-toggle::before
+    display: none
+
   .options
     visibility: hidden
 
-.searchresults-tag:hover
-  .options
-    visibility: visible
+// .searchresults-tag:hover
+//   .options
+//     visibility: visible
 
 button:focus
   outline: 0 !important
 
+
+td
+  vertical-align: baseline
 
 </style>

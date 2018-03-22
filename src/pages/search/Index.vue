@@ -8,7 +8,7 @@
                 Find hashtag ideas. Get more likes and followers.
             </h2>
 
-            <search-field></search-field>
+            <search-field class="mb-5"></search-field>
 
 
         </div>
@@ -47,4 +47,5 @@ export default {
 <style lang="sass" scoped>
 h2.lead
   line-height: 1.4
+
 </style>

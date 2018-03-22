@@ -86,6 +86,9 @@ $input-focus-border-color: $medium
 
 $border-radius: .15rem
 
+
+
+
 =vendor-prefix($name, $value)
   @each $vendor in ('-webkit-', '-moz-', '-ms-', '-o-', '') 
     #{$vendor}#{$name}: #{$value}
@@ -120,7 +123,9 @@ $border-radius: .15rem
 // ==============================
 // =            general            =
 // ==============================
-
+.feather
+  stroke: currentColor
+  stroke-width: 3px
 
 
 html
@@ -209,12 +214,17 @@ tr
     visibility: hidden
   .invalid-feedback-visible
     visibility: visible
-  i
+  .feather-hash
     position: absolute
-    margin: .9rem 1.4rem
-    width: 1rem
-    color: $input-placeholder-color
+    width: 1.5rem
+    height: 1.5rem
+    margin: .9rem 1.3rem
+    stroke: $input-placeholder-color
+    stroke-width: 2px
     z-index: 99
+  .feather-search
+    stroke: currentColor
+    padding-top: .3rem
   input
     padding-left: 3.5rem
   .input-group
@@ -226,17 +236,22 @@ tr
     border-left: 0
 
 
-#searchresults
+.searchresults-row
+  &:hover  
+    +from(767px)
+      background: #fcfcff
   font-size: ($font-size-base * 1.3)
   .searchresults-tag
-    // white-space: nowrap
-    // overflow: hidden
-    // text-overflow: ellipsis
+    white-space: nowrap
+    overflow: hidden
+    text-overflow: ellipsis
     overflow-wrap: break-word
     a
       color: $body-color
+      padding: 0
+      border-bottom: 0
     a.is-selected
-      border-bottom: 2px solid $body-color
+      border-bottom: 0
     a:hover
       color: $body-color
       text-decoration: none

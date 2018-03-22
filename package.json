@@ -17,6 +17,7 @@
     "bootstrap-vue": "^1.4.0",
     "bulma": "^0.5.3",
     "dotenv": "^4.0.0",
+    "feather-icons": "^4.7.0",
     "lodash": "^4.17.4",
     "request": "^2.83.0",
     "request-promise": "^4.2.2",
