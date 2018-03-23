@@ -89,8 +89,8 @@
                           <a class="dropdown-item dropdown-item-with-icon" :href="'https://www.instagram.com/explore/tags/'+tag.text+'/'" target="_blank">
                             <feather-icon type="instagram"></feather-icon>#{{tag.text}} on Instagram
                           </a>
-                          <div class="dropdown-divider"></div>
                           <!-- <span v-b-tooltip.hover title="Sign Up"><a class="dropdown-item dropdown-item-with-icon disabled" href="javascript:;"><feather-icon type="lock"></feather-icon><span style="color: transparent; text-shadow: 0 0 7px rgba(0,0,0,0.5);">12,345</span> posts</a></span> -->
+                          <!-- <div class="dropdown-divider"></div>
                           <a class="dropdown-item dropdown-item-with-icon disabled" href="javascript:;">
                             <span v-b-tooltip.hover.left title="Coming soon"><feather-icon type="lock"></feather-icon>Post stats</span>
                           </a>
@@ -99,7 +99,7 @@
                           </a>
                           <a class="dropdown-item dropdown-item-with-icon disabled" href="javascript:;">
                             <span v-b-tooltip.hover.left title="Coming soon"><feather-icon type="lock"></feather-icon>Save to Hashtag Groups</span>
-                          </a>
+                          </a> -->
                         </div>
                         
 

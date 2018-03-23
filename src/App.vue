@@ -129,10 +129,10 @@ $border-radius: .33rem
   stroke: currentColor
   stroke-width: 3px
 
-.fade-slide-y-enter-active, .router-transition-leave-active
+.fade-slide-y-enter-active, .fade-slide-y-leave-active
   transition: all .2s
 
-.fade-slide-y-enter, .router-transition-leave-to
+.fade-slide-y-enter, .fade-slide-y-leave-to
   opacity: 0
   transform: translateY(10px)
 
