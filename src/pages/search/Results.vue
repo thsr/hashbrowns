@@ -11,47 +11,49 @@
 
         <div class="w-100"></div>
 
-        <div v-if="loading" class="col-12 text-center mt-5">
+        <div v-if="loading" class="col-12 text-center mt-4">
             <i class="fa fa-circle-o-notch fa-spin fa-2x"></i>
         </div>
 
-        <div v-if="error" class="col-12 text-center mt-5">
+        <div v-if="error" class="col-12 text-center mt-4">
           {{error}}
         </div>
 
-        <div v-if="searchResult" class="col-12">
-          <div class="d-flex justify-content-center sticky-top pt-4" v-if="searchResult.data.length > 0">
-              <div v-if="listOfSelected.length < 1" class="text-center mr-3">
-                <button type="button" class="btn btn-primary" disabled>Select tags to copy to clipboard</button>
-              </div>
+        <div v-if="searchResult.data.length > 0" class="col-md-6 justify-content-center mb-3">
 
-              <div v-else-if="listOfSelected.length > 0" class="text-center mr-3">
-                <b-btn id="copySelected" v-clipboard:copy="listOfSelectedCopiable" v-clipboard:success="onCopy" variant="primary">Copy selection ({{listOfSelected.length}}) to clipboard</b-btn>
-                <b-tooltip disabled :show.sync="isCopied" target="copySelected" placement="top">Copied!</b-tooltip>
-              </div>
-
-              <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="orderByDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Sort by
-                </button>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="orderByDropdown">
-                  <a class="dropdown-item dropdown-item-with-icon" @click.prevent="sortResultsHashtagAZ" href="javascript:;"><feather-icon type="bar-chart"></feather-icon> Hashtag A&rarr;Z</a>
-                  <a class="dropdown-item dropdown-item-with-icon" @click.prevent="sortResultsHashtagZA" href="javascript:;"><feather-icon type="bar-chart-reverse"></feather-icon> Hashtag Z&rarr;A</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item dropdown-item-with-icon" @click.prevent="sortResultsRelevanceAsc" href="javascript:;"><feather-icon type="bar-chart"></feather-icon> Relevance 0%&rarr;100%</a>
-                  <a class="dropdown-item dropdown-item-with-icon" @click.prevent="sortResultsRelevanceDesc" href="javascript:;"><feather-icon type="bar-chart-reverse"></feather-icon> Relevance 100%&rarr;0%</a>
-                </div>
-              </div>
-
-              <div class="text-center ml-3">
-                <a class="btn btn-secondary" v-if="searchResult.data.length == listOfSelected.length" @click.prevent="deselectAllTags">Deselect All</a>
-                <a class="btn btn-secondary" v-else @click.prevent="selectAllTags">Select All</a>
-              </div>
+          <div v-if="listOfSelected.length < 1" class="text-center">
+            <button type="button" class="btn btn-primary" disabled>Select tags to copy to clipboard</button>
           </div>
+
+          <div v-else-if="listOfSelected.length > 0" class="text-center">
+            <b-btn id="copySelected" v-clipboard:copy="listOfSelectedCopiable" v-clipboard:success="onCopy" variant="primary">Copy selection ({{listOfSelected.length}}) to clipboard</b-btn>
+            <b-tooltip disabled :show.sync="isCopied" target="copySelected" placement="top">Copied!</b-tooltip>
+          </div>
+
+        </div>
+
+        <div v-if="searchResult.data.length > 0" class="col-md-6 justify-content-center d-flex mb-3">
+          <div class="mr-3">
+            <a class="btn btn-secondary" v-if="searchResult.data.length == listOfSelected.length" @click.prevent="deselectAllTags">Deselect All</a>
+            <a class="btn btn-secondary" v-else @click.prevent="selectAllTags">Select All</a>
+          </div>
+
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="orderByDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Sort by
+            </button>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="orderByDropdown">
+              <a class="dropdown-item dropdown-item-with-icon" @click.prevent="sortResultsHashtagAZ" href="javascript:;"><feather-icon type="bar-chart"></feather-icon> Hashtag A&rarr;Z</a>
+              <a class="dropdown-item dropdown-item-with-icon" @click.prevent="sortResultsHashtagZA" href="javascript:;"><feather-icon type="bar-chart-reverse"></feather-icon> Hashtag Z&rarr;A</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item dropdown-item-with-icon" @click.prevent="sortResultsRelevanceAsc" href="javascript:;"><feather-icon type="bar-chart"></feather-icon> Relevance 0%&rarr;100%</a>
+              <a class="dropdown-item dropdown-item-with-icon" @click.prevent="sortResultsRelevanceDesc" href="javascript:;"><feather-icon type="bar-chart-reverse"></feather-icon> Relevance 100%&rarr;0%</a>
+            </div>
+          </div>
+        </div>
           
           
-          <div class="col-md-12">
-              <div id="searchresults" class="row mt-5">
+          <div id="searchresults" v-if="searchResult.data.length > 0" class="col-md-12 mt-5">
 
 
                 <!-- searchresults-row -->
@@ -74,6 +76,8 @@
                         <a class="dropdown-toggle" href="#" role="button" :id="'moreHorizontal'+index" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                            <feather-icon type="more-horizontal"></feather-icon>
                         </a>
+
+                        
                         <div class="dropdown-menu">
                           <!-- <h6 class="dropdown-header">#{{tag.text.toUpperCase()}}</h6> -->
                           <a class="dropdown-item dropdown-item-with-icon" @click.prevent="$router.push('/search/' + tag.text)" href="javascript:;">
@@ -94,24 +98,22 @@
                             <span v-b-tooltip.hover.left title="Coming soon"><feather-icon type="lock"></feather-icon>Save to Hashtag Groups</span>
                           </a>
                         </div>
+                        
+
+
                       </div>
                     </div>
                   </div>
                 </div>
-            </div>
           </div>
 
-        </div>
+
+
+
+
+
 </div>
-
 </div>
-
-
-
-
-
-
-
 </template>
 
 <script>
@@ -297,13 +299,8 @@ export default {
   border-bottom: 2px solid #E9ECEF
   .dropdown-toggle::after, .dropdown-toggle::before
     display: none
-
   .options
     visibility: hidden
-
-// .searchresults-tag:hover
-//   .options
-//     visibility: visible
 
 button:focus
   outline: 0 !important

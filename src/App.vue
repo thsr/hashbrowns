@@ -86,7 +86,7 @@ $input-btn-focus-width: 0
 $input-focus-border-color: $medium
 
 
-$border-radius: .15rem
+$border-radius: .33rem
 
 
 
@@ -220,7 +220,7 @@ tr
     position: absolute
     width: 1.5rem
     height: 1.5rem
-    margin: .9rem 1.3rem
+    margin: .8rem 1.3rem
     stroke: $input-placeholder-color
     stroke-width: 2px
     z-index: 99
@@ -229,12 +229,12 @@ tr
     padding-top: .3rem
   input
     padding-left: 3.5rem
+    border-radius: $border-radius 0 0 $border-radius
   .input-group
     border-radius: $border-radius
     box-shadow: 0px 10px 51px 0px rgba(0,0,0,0.15)
   button
-    border-top-left-radius: 0
-    border-bottom-left-radius: 0
+    border-radius: 0 $border-radius $border-radius 0
     border-left: 0
 
 
@@ -266,7 +266,7 @@ nav
 
 .router-transition-enter, .router-transition-leave-to
   opacity: 0
-  transform: translateY(10px);
+  transform: translateY(10px)
 
 
 </style>
