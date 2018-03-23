@@ -1,7 +1,9 @@
 <template>
 <div>
   <main-header></main-header>
-  <router-view></router-view>
+  <transition name="router-transition" mode="out-in">
+    <router-view :key="$route.params.tag"></router-view>
+  </transition>
   <vue-progress-bar></vue-progress-bar>
 </div>
 </template>
@@ -258,5 +260,13 @@ tr
 
 nav
   z-index: 99
+
+.router-transition-enter-active, .router-transition-leave-active
+  transition: all .2s
+
+.router-transition-enter, .router-transition-leave-to
+  opacity: 0
+  transform: translateY(10px);
+
 
 </style>
