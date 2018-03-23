@@ -35,11 +35,11 @@
                   Sort by
                 </button>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="orderByDropdown">
-                  <a class="dropdown-item" @click.prevent="sortResultsHashtagAZ" href="javascript:;"><!-- <feather-icon type="bar-chart"></feather-icon>  -->Hashtag A&rarr;Z</a>
-                  <a class="dropdown-item" @click.prevent="sortResultsHashtagZA" href="javascript:;"><!-- <feather-icon type="bar-chart-reverse"></feather-icon>  -->Hashtag Z&rarr;A</a>
+                  <a class="dropdown-item dropdown-item-with-icon" @click.prevent="sortResultsHashtagAZ" href="javascript:;"><feather-icon type="bar-chart"></feather-icon> Hashtag A&rarr;Z</a>
+                  <a class="dropdown-item dropdown-item-with-icon" @click.prevent="sortResultsHashtagZA" href="javascript:;"><feather-icon type="bar-chart-reverse"></feather-icon> Hashtag Z&rarr;A</a>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" @click.prevent="sortResultsRelevanceAsc" href="javascript:;"><!-- <feather-icon type="bar-chart"></feather-icon>  -->Relevance Lo&rarr;Hi</a>
-                  <a class="dropdown-item" @click.prevent="sortResultsRelevanceDesc" href="javascript:;"><!-- <feather-icon type="bar-chart-reverse"></feather-icon>  -->Relevance Hi&rarr;Lo</a>
+                  <a class="dropdown-item dropdown-item-with-icon" @click.prevent="sortResultsRelevanceAsc" href="javascript:;"><feather-icon type="bar-chart"></feather-icon> Relevance 0%&rarr;100%</a>
+                  <a class="dropdown-item dropdown-item-with-icon" @click.prevent="sortResultsRelevanceDesc" href="javascript:;"><feather-icon type="bar-chart-reverse"></feather-icon> Relevance 100%&rarr;0%</a>
                 </div>
               </div>
 
@@ -124,22 +124,22 @@
                         </a>
                         <div class="dropdown-menu">
                           <!-- <h6 class="dropdown-header">#{{tag.text.toUpperCase()}}</h6> -->
-                          <a class="dropdown-item" @click.prevent="$router.push('/search/' + tag.text)" href="javascript:;">
-                            <feather-icon type="search" class="mr-2"></feather-icon>New search with #{{tag.text}}
+                          <a class="dropdown-item dropdown-item-with-icon" @click.prevent="$router.push('/search/' + tag.text)" href="javascript:;">
+                            <feather-icon type="search"></feather-icon>Search #{{tag.text}}
                           </a>
-                          <a class="dropdown-item" :href="'https://www.instagram.com/explore/tags/'+tag.text+'/'" target="_blank">
-                            <feather-icon type="instagram" class="mr-2"></feather-icon>Lookup #{{tag.text}} on Instagram
+                          <a class="dropdown-item dropdown-item-with-icon" :href="'https://www.instagram.com/explore/tags/'+tag.text+'/'" target="_blank">
+                            <feather-icon type="instagram"></feather-icon>#{{tag.text}} on Instagram
                           </a>
                           <div class="dropdown-divider"></div>
-                          <!-- <span v-b-tooltip.hover title="Sign Up"><a class="dropdown-item disabled" href="javascript:;"><feather-icon type="lock" class="mr-2"></feather-icon><span style="color: transparent; text-shadow: 0 0 7px rgba(0,0,0,0.5);">12,345</span> posts</a></span> -->
-                          <a class="dropdown-item disabled" href="javascript:;">
-                            <span v-b-tooltip.hover.left title="Upgrade to access"><feather-icon type="lock" class="mr-2"></feather-icon>Post stats</span>
+                          <!-- <span v-b-tooltip.hover title="Sign Up"><a class="dropdown-item dropdown-item-with-icon disabled" href="javascript:;"><feather-icon type="lock"></feather-icon><span style="color: transparent; text-shadow: 0 0 7px rgba(0,0,0,0.5);">12,345</span> posts</a></span> -->
+                          <a class="dropdown-item dropdown-item-with-icon disabled" href="javascript:;">
+                            <span v-b-tooltip.hover.left title="Coming soon"><feather-icon type="lock"></feather-icon>Post stats</span>
                           </a>
-                          <a class="dropdown-item disabled" href="javascript:;">
-                            <span v-b-tooltip.hover.left title="Upgrade to access"><feather-icon type="lock" class="mr-2"></feather-icon>Relevance score</span>
+                          <a class="dropdown-item dropdown-item-with-icon disabled" href="javascript:;">
+                            <span v-b-tooltip.hover.left title="Coming soon"><feather-icon type="lock"></feather-icon>Relevance score</span>
                           </a>
-                          <a class="dropdown-item disabled" href="javascript:;">
-                            <span v-b-tooltip.hover.left title="Upgrade to access"><feather-icon type="lock" class="mr-2"></feather-icon>Save to Hashtag Groups</span>
+                          <a class="dropdown-item dropdown-item-with-icon disabled" href="javascript:;">
+                            <span v-b-tooltip.hover.left title="Coming soon"><feather-icon type="lock"></feather-icon>Save to Hashtag Groups</span>
                           </a>
                         </div>
                       </div>
@@ -321,7 +321,7 @@ export default {
 </script>
 
 <style scoped lang="sass">
-.feather-hash, .feather-bar-chart-reverse, .feather-lock, .feather-search, .feather-instagram
+.feather-hash, .feather-bar-chart, .feather-bar-chart-reverse, .feather-lock, .feather-search, .feather-instagram
   width: 1rem
   height: 1rem
   stroke: currentColor
@@ -331,6 +331,12 @@ export default {
   height: 1.7rem
   stroke-width: 1.76px
   cursor: pointer
+
+
+.dropdown-item.dropdown-item-with-icon
+  padding-left: .7rem
+  .feather
+    margin-right: .7rem
 
 .tag-is-selected
   background: #F8F9FA
