@@ -1,7 +1,7 @@
 <template>
 <div>
   <main-header></main-header>
-  <transition name="fade-slide-y" mode="out-in">
+  <transition name="fade-slide-y" mode="out-in" appear>
     <router-view :key="$route.params.tag"></router-view>
   </transition>
   <vue-progress-bar></vue-progress-bar>
