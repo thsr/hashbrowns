@@ -1,14 +1,10 @@
 <template>
 <div>
-
   <main-header></main-header>
-  
   <transition name="router-transition" mode="out-in">
     <router-view :key="$route.params.tag"></router-view>
   </transition>
-
   <vue-progress-bar></vue-progress-bar>
-
 </div>
 </template>
 

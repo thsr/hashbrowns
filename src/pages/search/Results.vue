@@ -50,8 +50,8 @@
           </div>
           
           
-          <div class="col-md-12 mb-5">
-              <div id="searchresults" class="row my-5">
+          <div class="col-md-12">
+              <div id="searchresults" class="row mt-5">
 
 
                 <!-- searchresults-row -->
@@ -83,7 +83,6 @@
                             <feather-icon type="instagram"></feather-icon>#{{tag.text}} on Instagram
                           </a>
                           <div class="dropdown-divider"></div>
-                          <h6 class="dropdown-header">Coming soon</h6>
                           <!-- <span v-b-tooltip.hover title="Sign Up"><a class="dropdown-item dropdown-item-with-icon disabled" href="javascript:;"><feather-icon type="lock"></feather-icon><span style="color: transparent; text-shadow: 0 0 7px rgba(0,0,0,0.5);">12,345</span> posts</a></span> -->
                           <a class="dropdown-item dropdown-item-with-icon disabled" href="javascript:;">
                             <span v-b-tooltip.hover.left title="Coming soon"><feather-icon type="lock"></feather-icon>Post stats</span>
