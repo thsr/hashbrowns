@@ -69,7 +69,7 @@
                       <feather-icon type="hash"></feather-icon>{{tag.text}}</a>
                     </div>
 
-<!--                     <transition name="fade-slide-y">
+                    <!-- <transition name="fade-slide-y">
                       <div v-if="tag.displayTest" class="pt-1 mr-5">
                         <span v-b-tooltip.hover title="Instagram posts">{{tag.displayTest}}</span>
                       </div>
@@ -148,7 +148,6 @@ export default {
   },
 
   watch: {
-    // call again the method if the route changes
     '$route': 'fetchData'
   },
 
@@ -267,8 +266,6 @@ export default {
       })
     },
 
-
-
     sortResultsHashtagAZ () {
       return this.searchResult.data.sort( (a,b) => {
         var x = a.text.toLowerCase();
@@ -278,6 +275,7 @@ export default {
         return 0;
       })
     },
+
     sortResultsHashtagZA () {
       return this.searchResult.data.sort( (a,b) => {
         var x = a.text.toLowerCase();
@@ -285,11 +283,16 @@ export default {
         if (x < y) {return 1;}
         if (x > y) {return -1;}
         return 0;
-      })},
+      })
+    },
+
     sortResultsRelevanceAsc () {
-      return this.searchResult.data.sort( (a,b) => {return a.count - b.count})},
+      return this.searchResult.data.sort( (a,b) => {return a.count - b.count})
+    },
+
     sortResultsRelevanceDesc () {
-      return this.searchResult.data.sort( (a,b) => {return b.count - a.count})},
+      return this.searchResult.data.sort( (a,b) => {return b.count - a.count})
+    }
   }
 }
 </script>
