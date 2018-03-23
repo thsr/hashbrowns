@@ -3,7 +3,7 @@
 <div class="container container-full-page">
     <div class="row align-items-center justify-content-center">
         <div class="col-md-6 text-center">            
-            <h1 class="display-5">Trending tags for your content.</h1>
+            <h1 class="display-5">Trending&nbsp;tags for&nbsp;your&nbsp;content.</h1>
             <h2 class="lead mb-5">
                 Find hashtag ideas. Get more likes and followers.
             </h2>

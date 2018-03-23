@@ -1,7 +1,7 @@
 <template>
 <div>
   <main-header></main-header>
-  <transition name="router-transition" mode="out-in">
+  <transition name="fade-slide-y" mode="out-in">
     <router-view :key="$route.params.tag"></router-view>
   </transition>
   <vue-progress-bar></vue-progress-bar>
@@ -129,6 +129,12 @@ $border-radius: .33rem
   stroke: currentColor
   stroke-width: 3px
 
+.fade-slide-y-enter-active, .router-transition-leave-active
+  transition: all .2s
+
+.fade-slide-y-enter, .router-transition-leave-to
+  opacity: 0
+  transform: translateY(10px)
 
 html
   background-color: #fff
@@ -177,20 +183,10 @@ h1.display-5
   border: 0
   box-shadow: 0px 10px 51px 0px rgba(0,0,0,0.15)
 
-
-// .col-selected-tags
-//   +until(767px)
-//     position: fixed
-//     bottom: 3rem
-
 .col-selected-tags
   .card
     position: sticky
     top: 3rem
-
-// .col-selected-tags
-//   .card
-//     top: 3rem
 
 .container-full-page
   .row
@@ -201,12 +197,6 @@ h1.display-5
 .toolscolumn
   .btn, .dropdown-item
     font-size: .875rem 
-
-tr
-  vertical-align: baseline
-
-.table th 
-  border-top: 0
 
 #searchfield
   text-align: left
@@ -237,7 +227,6 @@ tr
     border-radius: 0 $border-radius $border-radius 0
     border-left: 0
 
-
 .searchresults-row
   font-size: ($font-size-base * 1.3)
   &:not(.header):hover  
@@ -260,13 +249,6 @@ tr
 
 nav
   z-index: 99
-
-.router-transition-enter-active, .router-transition-leave-active
-  transition: all .2s
-
-.router-transition-enter, .router-transition-leave-to
-  opacity: 0
-  transform: translateY(10px)
 
 
 </style>

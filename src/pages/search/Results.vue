@@ -69,11 +69,15 @@
                       <feather-icon type="hash"></feather-icon>{{tag.text}}</a>
                     </div>
 
-
+<!--                     <transition name="fade-slide-y">
+                      <div v-if="tag.displayTest" class="pt-1 mr-5">
+                        <span v-b-tooltip.hover title="Instagram posts">{{tag.displayTest}}</span>
+                      </div>
+                    </transition> -->
 
                     <div style="width: 1.7rem; height: 1.7rem;">
                       <div class="btn-group dropleft">
-                        <a class="dropdown-toggle" href="#" role="button" :id="'moreHorizontal'+index" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a v-b-tooltip.hover title="More" class="dropdown-toggle" href="#" role="button" :id="'moreHorizontal'+index" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                            <feather-icon type="more-horizontal"></feather-icon>
                         </a>
 
@@ -135,6 +139,12 @@ export default {
 
   mounted () {
     this.fetchData()
+
+    // setTimeout( () => {
+    //     this.searchResult.data = this.searchResult.data.map( o => {
+    //     return { ...o, displayTest: '12,345' } 
+    //   })
+    // }, 5000)
   },
 
   watch: {
@@ -187,7 +197,7 @@ export default {
           this.$Progress.finish()
 
           if (res.data.data.length == 0) {
-            this.throwError('no hashtags found :(')
+            this.throwError('No hashtags found :(')
           } else {
             const originalSearchResult = [{ text: this.$route.params.tag, isSelected: true, count: 133713371337 }]
             const returnedSearchResult = res.data.data.map( o => {
