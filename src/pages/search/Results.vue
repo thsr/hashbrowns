@@ -6,20 +6,20 @@
     <div class="row align-items-top justify-content-left">
 
         <div class="col-md-6 offset-md-3 text-center">
-            <search-field :searchedHashtag="$route.params.tag" class="mb-4"></search-field>
+            <search-field :searchedHashtag="$route.params.tag" class="mb-5"></search-field>
         </div>
 
         <div class="w-100"></div>
 
-        <div v-if="loading" class="col-12 text-center mt-4">
+        <div v-if="loading" class="col-12 text-center">
             <i class="fa fa-circle-o-notch fa-spin fa-2x"></i>
         </div>
 
-        <div v-if="error" class="col-12 text-center mt-4">
+        <div v-if="error" class="col-12 text-center">
           {{error}}
         </div>
 
-        <div v-if="searchResult.data.length > 0" class="col-md-6 justify-content-center mb-3">
+        <div v-if="searchResult.data.length > 0" class="col-md-6 justify-content-center mb-4">
 
           <div v-if="listOfSelected.length < 1" class="text-center">
             <button type="button" class="btn btn-primary" disabled>Select tags to copy to clipboard</button>
@@ -190,6 +190,16 @@ export default {
         this.$Progress.start()
 
         const endpoint = process.env.HB_ENDPOINT + '/search/' + this.$route.params.tag
+
+        /*localhost test*/
+        // setTimeout( () => {
+        //     this.loading = false
+        //     this.$Progress.finish()
+        //     this.searchResult.data = [{"text":"bigquery","isSelected":true,"count":133713371337},{"text":"bigdata","isSelected":false,"count":64},{"text":"googlecloud","isSelected":false,"count":45},{"text":"googlecloudplatform","isSelected":false,"count":37},{"text":"machinelearning","isSelected":false,"count":36},{"text":"computeengine","isSelected":false,"count":30},{"text":"ai","isSelected":false,"count":30},{"text":"wpongcp","isSelected":false,"count":29},{"text":"instagood","isSelected":false,"count":29},{"text":"wordpressongooglecloud","isSelected":false,"count":29},{"text":"100kin90days","isSelected":false,"count":29},{"text":"1daywpworkshop","isSelected":false,"count":29},{"text":"chicago","isSelected":false,"count":29},{"text":"containerengine","isSelected":false,"count":29},{"text":"instapic","isSelected":false,"count":29},{"text":"googlepartner","isSelected":false,"count":29},{"text":"cloudcomputing","isSelected":false,"count":28},{"text":"googlecloudonboard","isSelected":false,"count":24},{"text":"thismychi","isSelected":false,"count":23},{"text":"kubernetes","isSelected":false,"count":23},{"text":"chiloopnews","isSelected":false,"count":23},{"text":"mychicagojourneys","isSelected":false,"count":23},{"text":"hiltonchicagohotel","isSelected":false,"count":23},{"text":"720southmichigan","isSelected":false,"count":23},{"text":"hadoop","isSelected":false,"count":22},{"text":"data","isSelected":false,"count":22},{"text":"aws","isSelected":false,"count":21},{"text":"redshift","isSelected":false,"count":21},{"text":"tableau","isSelected":false,"count":21},{"text":"sql","isSelected":false,"count":20},{"text":"impala","isSelected":false,"count":19},{"text":"teradata","isSelected":false,"count":19},{"text":"microsoft","isSelected":false,"count":19},{"text":"oracle","isSelected":false,"count":19},{"text":"graphs","isSelected":false,"count":19},{"text":"sas","isSelected":false,"count":19},{"text":"datahobby","isSelected":false,"count":19},{"text":"charts","isSelected":false,"count":19},{"text":"sqlserver","isSelected":false,"count":19},{"text":"roitraining","isSelected":false,"count":18},{"text":"google","isSelected":false,"count":17},{"text":"analytics","isSelected":false,"count":15},{"text":"businessintelligence","isSelected":false,"count":14},{"text":"datawarehouse","isSelected":false,"count":13},{"text":"etl","isSelected":false,"count":12},{"text":"bi","isSelected":false,"count":12},{"text":"predictive","isSelected":false,"count":11},{"text":"twdi","isSelected":false,"count":11},{"text":"dwh","isSelected":false,"count":11},{"text":"gcp","isSelected":false,"count":9},{"text":"cloud","isSelected":false,"count":8}]
+        // }, 1000)
+
+        // return
+        /*localhost test*/
 
         axios.get(endpoint)
         .then( (res) => {
