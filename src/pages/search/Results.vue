@@ -53,54 +53,6 @@
           <div class="col-md-12">
               <div id="searchresults" class="row mt-5">
 
-                <!-- searchresults-row header -->
-<!--                 <div class="col-md-12 py-2 searchresults-row header">
-                  <div class="d-flex align-items-center">
-                    <div v-if="searchResult.data.length == listOfSelected.length" 
-                         class="mr-auto"
-                         style="width: 1.7rem; height: 1.7rem;" 
-                         v-b-tooltip.hover.right title="Deselect All"
-                         @click.prevent="deselectAllTags"
-                         >
-                      <feather-icon type="minus-square"></feather-icon>
-                    </div>
-                    <div v-else
-                         class="mr-auto" 
-                         style="width: 1.7rem; height: 1.7rem;" 
-                         v-b-tooltip.hover.right title="Select All"
-                         @click.prevent="selectAllTags"
-                         >
-                      <feather-icon type="plus-square"></feather-icon>
-                    </div>
-
-                    <div class="mr-4" style="height: 1.7rem;">
-                      <div class="btn-group dropleft">
-                        <a class="dropdown-toggle" href="#" role="button" :id="'moreHorizontal'+index" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                           <feather-icon type="copy"></feather-icon> 51
-                        </a>
-                        <div class="dropdown-menu">
-                          <a class="dropdown-item disabled" href="javascript:;">
-                            <span v-b-tooltip.hover.left title="Upgrade to access"><feather-icon type="lock" class="mr-2"></feather-icon>Save to Hashtag Groups</span>
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div style="width: 1.7rem; height: 1.7rem;">
-                      <div class="btn-group dropleft">
-                        <a class="dropdown-toggle" href="#" role="button" :id="'moreHorizontal'+index" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                           <feather-icon type="filter"></feather-icon>
-                        </a>
-                        <div class="dropdown-menu">
-                          <a class="dropdown-item disabled" href="javascript:;">
-                            <span v-b-tooltip.hover.left title="Upgrade to access"><feather-icon type="lock" class="mr-2"></feather-icon>Save to Hashtag Groups</span>
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-
-                  </div>
-                </div>  -->
 
                 <!-- searchresults-row -->
                 <div class="col-md-12 py-2" v-for="(tag, index) in searchResult.data" :class="{ 'searchresults-row': true, 'tag-is-selected': tag.isSelected }">
