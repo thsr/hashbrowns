@@ -55,7 +55,6 @@
           
           <div id="searchresults" v-if="searchResult.data.length > 0" class="col-md-12 mt-5">
 
-
                 <!-- searchresults-row -->
                 <div class="col-md-12 py-2" v-for="(tag, index) in searchResult.data" :class="{ 'searchresults-row': true, 'tag-is-selected': tag.isSelected }">
                   <div class="d-flex align-items-center">
@@ -130,7 +129,7 @@ export default {
     return {
       loading: false,
       searchResult: {data: []},
-      error: {},
+      error: '',
       isCopied: false,
       //tmp
       show: true
@@ -181,12 +180,15 @@ export default {
 
     fetchData () {
       if ( /[^a-zA-Z0-9_ÂÃÄÀÁÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿ]/.test(this.$route.params.tag) ) {
-        this.throwError('hashtags can\'t have special characters :(')
+        this.throwError('Hashtags can\'t have special characters :(')
+        return
       } else {
         this.error = null
         this.searchResult = {data: []}
         this.loading = true
         this.$Progress.start()
+
+        const startTime = new Date()
 
         const endpoint = process.env.HB_ENDPOINT + '/search/' + this.$route.params.tag
 
@@ -215,10 +217,14 @@ export default {
             this.searchResult.data = originalSearchResult.concat(returnedSearchResult)
           }
 
+          const endTime = new Date()
+          const elapsedTime = endTime - startTime
+
           dataLayer.push({
             event: 'hashtag_search',
             tag_name: this.$route.params.tag,
-            nb_results: res.data.data.length.toString()
+            nb_results: res.data.data.length.toString(),
+            query_time: elapsedTime
             
           })
         })
