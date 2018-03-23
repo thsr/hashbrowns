@@ -77,7 +77,7 @@
 
                     <div style="width: 1.7rem; height: 1.7rem;">
                       <div class="btn-group dropleft">
-                        <a v-b-tooltip.hover title="More" class="dropdown-toggle" href="#" role="button" :id="'moreHorizontal'+index" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="dropdown-toggle" href="#" role="button" :id="'moreHorizontal'+index" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                            <feather-icon type="more-horizontal"></feather-icon>
                         </a>
 
