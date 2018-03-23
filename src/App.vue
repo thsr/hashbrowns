@@ -237,10 +237,10 @@ tr
 
 
 .searchresults-row
-  &:hover  
+  font-size: ($font-size-base * 1.3)
+  &:not(.header):hover  
     +from(767px)
       background: #fcfcff
-  font-size: ($font-size-base * 1.3)
   .searchresults-tag
     white-space: nowrap
     overflow: hidden

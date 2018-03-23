@@ -20,8 +20,8 @@
         </div>
 
         <div v-if="searchResult" class="col-12">
-          <div class="d-flex justify-content-center sticky-top pt-4">
-              <div v-if="searchResult.data.length > 0 && listOfSelected.length < 1" class="text-center mr-3">
+          <div class="d-flex justify-content-center sticky-top pt-4" v-if="searchResult.data.length > 0">
+              <div v-if="listOfSelected.length < 1" class="text-center mr-3">
                 <button type="button" class="btn btn-primary" disabled>Select tags to copy to clipboard</button>
               </div>
 
@@ -30,9 +30,9 @@
                 <b-tooltip disabled :show.sync="isCopied" target="copySelected" placement="top">Copied!</b-tooltip>
               </div>
 
-              <div class="dropdown" v-if="searchResult.data.length > 0">
+              <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="orderByDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Order by
+                  Sort by
                 </button>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="orderByDropdown">
                   <a class="dropdown-item" @click.prevent="sortResultsHashtagAZ" href="javascript:;"><!-- <feather-icon type="bar-chart"></feather-icon>  -->Hashtag A&rarr;Z</a>
@@ -42,18 +42,67 @@
                   <a class="dropdown-item" @click.prevent="sortResultsRelevanceDesc" href="javascript:;"><!-- <feather-icon type="bar-chart-reverse"></feather-icon>  -->Relevance Hi&rarr;Lo</a>
                 </div>
               </div>
+
+              <div class="text-center ml-3">
+                <a class="btn btn-secondary" v-if="searchResult.data.length == listOfSelected.length" @click.prevent="deselectAllTags">Deselect All</a>
+                <a class="btn btn-secondary" v-else @click.prevent="selectAllTags">Select All</a>
+              </div>
           </div>
           
           
           <div class="col-md-12">
               <div id="searchresults" class="row mt-5">
-                <div class="col-md-12 py-2 searchresults-row">
+
+                <!-- searchresults-row header -->
+<!--                 <div class="col-md-12 py-2 searchresults-row header">
                   <div class="d-flex align-items-center">
-                    <div class="mr-5" style="width: 1.7rem; height: 1.7rem;" @click="selectAllTags">
-                      <feather-icon type="square"></feather-icon><feather-icon type="x-square"></feather-icon>
+                    <div v-if="searchResult.data.length == listOfSelected.length" 
+                         class="mr-auto"
+                         style="width: 1.7rem; height: 1.7rem;" 
+                         v-b-tooltip.hover.right title="Deselect All"
+                         @click.prevent="deselectAllTags"
+                         >
+                      <feather-icon type="minus-square"></feather-icon>
                     </div>
+                    <div v-else
+                         class="mr-auto" 
+                         style="width: 1.7rem; height: 1.7rem;" 
+                         v-b-tooltip.hover.right title="Select All"
+                         @click.prevent="selectAllTags"
+                         >
+                      <feather-icon type="plus-square"></feather-icon>
+                    </div>
+
+                    <div class="mr-4" style="height: 1.7rem;">
+                      <div class="btn-group dropleft">
+                        <a class="dropdown-toggle" href="#" role="button" :id="'moreHorizontal'+index" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                           <feather-icon type="copy"></feather-icon> 51
+                        </a>
+                        <div class="dropdown-menu">
+                          <a class="dropdown-item disabled" href="javascript:;">
+                            <span v-b-tooltip.hover.left title="Upgrade to access"><feather-icon type="lock" class="mr-2"></feather-icon>Save to Hashtag Groups</span>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div style="width: 1.7rem; height: 1.7rem;">
+                      <div class="btn-group dropleft">
+                        <a class="dropdown-toggle" href="#" role="button" :id="'moreHorizontal'+index" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                           <feather-icon type="filter"></feather-icon>
+                        </a>
+                        <div class="dropdown-menu">
+                          <a class="dropdown-item disabled" href="javascript:;">
+                            <span v-b-tooltip.hover.left title="Upgrade to access"><feather-icon type="lock" class="mr-2"></feather-icon>Save to Hashtag Groups</span>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+
                   </div>
-                </div>  
+                </div>  -->
+
+                <!-- searchresults-row -->
                 <div class="col-md-12 py-2" v-for="(tag, index) in searchResult.data" :class="{ 'searchresults-row': true, 'tag-is-selected': tag.isSelected }">
                   <div class="d-flex align-items-center">
 
@@ -75,60 +124,32 @@
                         </a>
                         <div class="dropdown-menu">
                           <!-- <h6 class="dropdown-header">#{{tag.text.toUpperCase()}}</h6> -->
-                          <a class="dropdown-item" @click.prevent="$router.push('/search/' + tag.text)" href="javascript:;"><feather-icon type="search" class="mr-2"></feather-icon>New search with #{{tag.text}}</a>
-                          <a class="dropdown-item" :href="'https://www.instagram.com/explore/tags/'+tag.text+'/'" target="_blank"><feather-icon type="instagram" class="mr-2"></feather-icon>Lookup #{{tag.text}} on Instagram</a>
+                          <a class="dropdown-item" @click.prevent="$router.push('/search/' + tag.text)" href="javascript:;">
+                            <feather-icon type="search" class="mr-2"></feather-icon>New search with #{{tag.text}}
+                          </a>
+                          <a class="dropdown-item" :href="'https://www.instagram.com/explore/tags/'+tag.text+'/'" target="_blank">
+                            <feather-icon type="instagram" class="mr-2"></feather-icon>Lookup #{{tag.text}} on Instagram
+                          </a>
                           <div class="dropdown-divider"></div>
                           <!-- <span v-b-tooltip.hover title="Sign Up"><a class="dropdown-item disabled" href="javascript:;"><feather-icon type="lock" class="mr-2"></feather-icon><span style="color: transparent; text-shadow: 0 0 7px rgba(0,0,0,0.5);">12,345</span> posts</a></span> -->
-                          <span v-b-tooltip.hover title="Upgrade to access"><a class="dropdown-item disabled" href="javascript:;"><feather-icon type="lock" class="mr-2"></feather-icon>Post stats</a></span>
-                          <span v-b-tooltip.hover title="Upgrade to access"><a class="dropdown-item disabled" href="javascript:;"><feather-icon type="lock" class="mr-2"></feather-icon>Relevance score</a></span>
-                          <span v-b-tooltip.hover title="Upgrade to access"><a class="dropdown-item disabled" href="javascript:;"><feather-icon type="lock" class="mr-2"></feather-icon>Save to Hashtag Groups</a></span>
+                          <a class="dropdown-item disabled" href="javascript:;">
+                            <span v-b-tooltip.hover.left title="Upgrade to access"><feather-icon type="lock" class="mr-2"></feather-icon>Post stats</span>
+                          </a>
+                          <a class="dropdown-item disabled" href="javascript:;">
+                            <span v-b-tooltip.hover.left title="Upgrade to access"><feather-icon type="lock" class="mr-2"></feather-icon>Relevance score</span>
+                          </a>
+                          <a class="dropdown-item disabled" href="javascript:;">
+                            <span v-b-tooltip.hover.left title="Upgrade to access"><feather-icon type="lock" class="mr-2"></feather-icon>Save to Hashtag Groups</span>
+                          </a>
                         </div>
                       </div>
                     </div>
-
-<!--                     <div style="width: 1.7rem; height: 1.7rem;">
-                      <feather-icon type="more-horizontal"></feather-icon>
-                    </div> -->
-
                   </div>
-
-<!--                 <div class="mr-5 my-2 searchresults-tag" v-for="tag in searchResult.data"> <feather-icon v-if="!tag.isSelected" type="square"></feather-icon><feather-icon v-if="tag.isSelected" type="x-square"></feather-icon>
-                  <a @click="tag.isSelected = !tag.isSelected" href="javascript:;" class="pb-1" :class="{'is-selected': tag.isSelected}">
-                    <feather-icon type="hash" class="feather-hash"></feather-icon>{{tag.text}}</a>
-                </div> -->
-              </div>
-
-<!-- <table id="searchresults" class="table table-sm mt-5">
-  <thead>
-    <tr>
-      <th>
-        123<i data-feather="circle"></i>123
-      </th>
-      <th class="text-center" scope="col">Hashtag</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr v-for="(tag, index) in searchResult.data">
-      <td>
-        123<svg class="feather feather-activity">
-  <use xlink:href="./../node_modules/feather-icons/dist/feather-sprite.svg#activity"/>
-</svg>123
-      </td>
-      <td class="text-center py-2">
-        <div class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input" :id="index" v-model="tag.isSelected" href="javascript:;">
-          <label class="custom-control-label" :for="index">#{{tag.text}}</label>
-        </div>
-      </td>
-      <td class="text-center py-2">#{{tag.text}}</td>
-    </tr>
-  </tbody>
-</table> -->
-
+                </div>
+            </div>
           </div>
-        </div>
 
-    </div>
+        </div>
 </div>
 
 </div>
@@ -175,6 +196,7 @@ export default {
     listOfSelected () {
       return this.searchResult.data.filter( o => o.isSelected);
     },
+
     listOfSelectedCopiable () {
       return this.searchResult.data
         .filter( o => o.isSelected)
@@ -183,10 +205,9 @@ export default {
         })
         .join(' ')
     },
+
     isAllTagsSelected () {
-      return this.searchResult.data.filter( o => {
-        return o.isSelected
-      })
+      return this.searchResult.data.length - this.listOfSelected.length
     }
   },
 
@@ -261,8 +282,14 @@ export default {
     },
 
     selectAllTags () {
-      this.searchResult.data.map( o => {
+      this.searchResult.data = this.searchResult.data.map( o => {
         return { text: o.text, isSelected: true, count: o.count } 
+      })
+    },
+
+    deselectAllTags () {
+      this.searchResult.data = this.searchResult.data.map( o => {
+        return { text: o.text, isSelected: false, count: o.count } 
       })
     },
 
@@ -294,12 +321,12 @@ export default {
 </script>
 
 <style scoped lang="sass">
-.feather-hash, .feather-bar-chart, .feather-bar-chart-reverse, .feather-lock, .feather-search, .feather-instagram
+.feather-hash, .feather-bar-chart-reverse, .feather-lock, .feather-search, .feather-instagram
   width: 1rem
   height: 1rem
   stroke: currentColor
 
-.feather-square, .feather-x-square, .feather-more-horizontal
+.feather-square, .feather-x-square, .feather-more-horizontal, .feather-plus-square, .feather-minus-square, .feather-filter, .feather-copy
   width: 1.7rem
   height: 1.7rem
   stroke-width: 1.76px
