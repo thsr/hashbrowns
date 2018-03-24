@@ -249,7 +249,6 @@ export default {
         tag_name: this.$route.params.tag,
         nb_results: this.searchResult.data.length.toString(),
         nb_copied: this.listOfSelected.length.toString()
-        
       })
 
       this.isCopied = true;
@@ -261,18 +260,30 @@ export default {
     },
 
     selectAllTags () {
+      dataLayer.push({
+        event: 'hashtag_search_select_all',
+        tag_name: this.$route.params.tag
+      })
       this.searchResult.data = this.searchResult.data.map( o => {
         return { text: o.text, isSelected: true, count: o.count } 
       })
     },
 
     deselectAllTags () {
+      dataLayer.push({
+        event: 'hashtag_search_deselect_all',
+        tag_name: this.$route.params.tag
+      })
       this.searchResult.data = this.searchResult.data.map( o => {
         return { text: o.text, isSelected: false, count: o.count } 
       })
     },
 
     sortResultsHashtagAZ () {
+      dataLayer.push({
+        event: 'hashtag_search_sort_hashtag_az',
+        tag_name: this.$route.params.tag
+      })
       return this.searchResult.data.sort( (a,b) => {
         var x = a.text.toLowerCase();
         var y = b.text.toLowerCase();
@@ -283,6 +294,10 @@ export default {
     },
 
     sortResultsHashtagZA () {
+      dataLayer.push({
+        event: 'hashtag_search_sort_hashtag_za',
+        tag_name: this.$route.params.tag
+      })
       return this.searchResult.data.sort( (a,b) => {
         var x = a.text.toLowerCase();
         var y = b.text.toLowerCase();
@@ -293,10 +308,18 @@ export default {
     },
 
     sortResultsRelevanceAsc () {
+      dataLayer.push({
+        event: 'hashtag_search_sort_relevance_asc',
+        tag_name: this.$route.params.tag
+      })
       return this.searchResult.data.sort( (a,b) => {return a.count - b.count})
     },
 
     sortResultsRelevanceDesc () {
+      dataLayer.push({
+        event: 'hashtag_search_sort_relevance_desc',
+        tag_name: this.$route.params.tag
+      })
       return this.searchResult.data.sort( (a,b) => {return b.count - a.count})
     }
   }
