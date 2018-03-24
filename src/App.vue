@@ -229,9 +229,9 @@ h1.display-5
 
 .searchresults-row
   font-size: ($font-size-base * 1.3)
-  &:not(.header):hover  
-    +from(767px)
-      background: #fcfcff
+  // &:not(.header):hover  
+  //   +from(767px)
+  //     background: #fcfcff
   .searchresults-tag
     white-space: nowrap
     overflow: hidden

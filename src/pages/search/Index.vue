@@ -47,5 +47,6 @@ export default {
 <style lang="sass" scoped>
 h2.lead
   line-height: 1.4
+  font-weight: 400
 
 </style>

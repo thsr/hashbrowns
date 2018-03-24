@@ -322,10 +322,10 @@ export default {
     margin-right: .7rem
 
 .tag-is-selected
-  background: #F8F9FA
+  background: #ecf0f4
 
 .searchresults-row
-  border-bottom: 2px solid #E9ECEF
+  border-bottom: 2px solid #e0e3e6
   .dropdown-toggle::after, .dropdown-toggle::before
     display: none
   .options
