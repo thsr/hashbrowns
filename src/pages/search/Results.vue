@@ -83,7 +83,7 @@
                         
                         <div class="dropdown-menu">
                           <!-- <h6 class="dropdown-header">#{{tag.text.toUpperCase()}}</h6> -->
-                          <a class="dropdown-item dropdown-item-with-icon" @click.prevent="$router.push('/search/' + tag.text)" href="javascript:;">
+                          <a v-if="tag.text != $route.params.tag" class="dropdown-item dropdown-item-with-icon" @click.prevent="$router.push('/search/' + tag.text)" href="javascript:;">
                             <feather-icon type="search"></feather-icon>Search #{{tag.text}}
                           </a>
                           <a class="dropdown-item dropdown-item-with-icon" :href="'https://www.instagram.com/explore/tags/'+tag.text+'/'" target="_blank">
