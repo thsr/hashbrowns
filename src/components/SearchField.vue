@@ -60,7 +60,7 @@ export default {
       return /[^a-zA-Z0-9_ÂÃÄÀÁÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿ]/.test(this.searchTerm)
     },
     hasSpecialCharactersState () {
-      return !/[^a-zA-Z0-9_ÂÃÄÀÁÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿ]/.test(this.searchTerm) || this.name == '' ? null : false
+      return !this.hasSpecialCharacters || this.name == '' ? null : false
     }
   },
   methods: {
