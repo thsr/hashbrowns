@@ -158,7 +158,7 @@ p a
 a:hover
   color: $black
 
-h1.display-5
+h1.display-5.hero
   background: linear-gradient(-45deg, #b721ff, #21d4fd, #2af598)
   // background: linear-gradient(-45deg, #F2E9D9, #C7E0EC, #227FC0, #FC5E5E)
   // background: linear-gradient(-45deg, #C7E0EC, #227FC0, #FC5E5E)
@@ -228,7 +228,7 @@ h1.display-5
     border-left: 0
 
 .searchresults-row
-  font-size: ($font-size-base * 1.3)
+  font-size: ($font-size-base * 1.1)
   // &:not(.header):hover  
   //   +from(767px)
   //     background: #fcfcff

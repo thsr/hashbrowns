@@ -137,6 +137,7 @@ export default {
   },
 
   mounted () {
+
     this.fetchData()
 
     // setTimeout( () => {
@@ -219,6 +220,9 @@ export default {
 
           const endTime = new Date()
           const elapsedTime = endTime - startTime
+
+          if (!localStorage.getItem("hb_maincomponent")) localStorage.setItem("hb_maincomponent", 1)
+          else if (localStorage.getItem("hb_maincomponent")) localStorage.setItem("hb_maincomponent", Number(localStorage.getItem("hb_maincomponent")) + 1)
 
           dataLayer.push({
             event: 'hashtag_search',

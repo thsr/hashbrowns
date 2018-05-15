@@ -3,12 +3,16 @@ import Router from 'vue-router'
 
 import Search from '@/pages/search/Index.vue'
 import SearchResults from '@/pages/search/Results.vue'
+import Auth from '@/pages/Auth.vue'
 import About from '@/pages/About.vue'
 import Privacy from '@/pages/Privacy.vue'
 
+
+import firebase from 'firebase'
+
 Vue.use(Router)
 
-export default new Router({
+let router = new Router({
   mode: 'history',
   linkActiveClass: 'active',
   routes: [
@@ -24,7 +28,11 @@ export default new Router({
       path: '/search/:tag',
       name: 'SearchResults', // this one has the loading bar disabled based on route name in App.vue
       component: SearchResults,
-      meta: {gtm: '/search/-tag-'}
+      meta: {requiresAuth: true, gtm: '/search/-tag-'}
+    },
+    {
+      path: '/auth',
+      component: Auth
     },
     {
       path: '/about',
@@ -40,3 +48,16 @@ export default new Router({
     }
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  let currentUser = firebase.auth().currentUser
+  let requiresAuth = to.matched.some(record => record.meta.requiresAuth)
+  let numberSearches = parseInt(localStorage.getItem("hb_maincomponent"))
+
+  if ( requiresAuth && !currentUser && (numberSearches < 3) ) next()
+  else if ( requiresAuth && !currentUser && (numberSearches >= 3) ) next('/auth')
+  // else if (!requiresAuth && currentUser) next('/search')
+  else next()
+})
+
+export default router

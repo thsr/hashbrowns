@@ -4,6 +4,42 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 
+
+
+/*======================================
+=            firebase stuff            =
+======================================*/
+
+import firebase from 'firebase'
+import VueFire from 'vuefire'
+
+Vue.use(VueFire)
+
+import { firebaseApp } from '@/js/firebase'
+
+let app
+
+firebaseApp
+
+firebase.auth().onAuthStateChanged(function(user) {
+  if (!app) {
+    /* eslint-disable no-new */
+    app = new Vue({
+      el: '#app',
+      template: '<App/>',
+      components: { App },
+      router
+    })
+  }
+});
+
+/*=====  End of firebase stuff  ======*/
+
+
+
+
+
+
 /*=========================================
 =            progressbar stuff            =
 =========================================*/
@@ -105,14 +141,4 @@ Vue.use(BootstrapVue)
 
 
 
-
 Vue.config.productionTip = false
-
-/* eslint-disable no-new */
-new Vue({
-  el: '#app',
-  router,
-  template: '<App/>',
-  components: { App }
-})
-
