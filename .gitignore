@@ -1,6 +1,8 @@
 .DS_Store
 dist
 
+testbitbucket
+
 # Logs
 logs
 *.log
