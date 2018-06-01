@@ -120,7 +120,7 @@ Vue.use(VueGtm, {
 =            feather icon            =
 ====================================*/
 
-import { install as VueFeatherIcon } from 'vue-feather-icon'
+import { install as VueFeatherIcon } from 'vue-feather-icon-corrected'
  
 Vue.use(VueFeatherIcon)
 /*=====  End of feather icon  ======*/
