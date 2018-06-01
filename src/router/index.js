@@ -4,6 +4,7 @@ import Router from 'vue-router'
 import Search from '@/pages/search/Index.vue'
 import SearchResults from '@/pages/search/Results.vue'
 import Auth from '@/pages/Auth.vue'
+import Profile from '@/pages/Profile.vue'
 import About from '@/pages/About.vue'
 import Privacy from '@/pages/Privacy.vue'
 
@@ -33,6 +34,11 @@ let router = new Router({
     {
       path: '/auth',
       component: Auth
+    },
+    {
+      path: '/profile',
+      component: Profile,
+      meta: {requiresAuth: true}
     },
     {
       path: '/about',

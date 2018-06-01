@@ -17,13 +17,8 @@
             <li class="nav-item">
                 <router-link :to="{ path: '/about' }" class="nav-link" href="javascript:;">About</router-link>
             </li>
-
-            <li v-if="!abc" class="nav-item">
-              <router-link :to="{ path: '/auth' }" class="nav-link" href="javascript:;">Log In or Sign Up</router-link>
-            </li>
-
-            <li v-if="abc" class="nav-item">
-              <a @click="logout" class="nav-link" href="javascript:;">Log Out</a>
+            <li class="nav-item">
+                <router-link :to="{ path: '/profile' }" class="nav-link" href="javascript:;">Profile</router-link>
             </li>
         </ul>
     </div>
