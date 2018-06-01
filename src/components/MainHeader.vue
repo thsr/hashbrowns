@@ -5,20 +5,20 @@
 <template>
 
 <nav class="navbar navbar-expand-lg navbar-light" style="background: transparent;">
-    <router-link :to="{ path: '/' }" class="navbar-brand" href="javascript:;"><span class="logo1">hashbrowns</span><span class="logo2">.cc</span></router-link>
+    <router-link :to="{ path: '/' }" class="navbar-brand"><span class="logo1">hashbrowns</span><span class="logo2">.cc</span></router-link>
     <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse justify-content-md-end" id="navbarNav">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <router-link :to="{ path: '/search' }" class="nav-link" href="javascript:;">Search</router-link>
+                <router-link :to="{ path: '/search' }" class="nav-link">Search</router-link>
             </li>
             <li class="nav-item">
-                <router-link :to="{ path: '/about' }" class="nav-link" href="javascript:;">About</router-link>
+                <router-link :to="{ path: '/about' }" class="nav-link">About</router-link>
             </li>
             <li class="nav-item">
-                <router-link :to="{ path: '/profile' }" class="nav-link" href="javascript:;">Profile</router-link>
+                <router-link :to="{ path: '/profile' }" class="nav-link">Profile</router-link>
             </li>
         </ul>
     </div>
