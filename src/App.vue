@@ -169,11 +169,14 @@ h1.display-5.hero
   background: linear-gradient(-45deg, #b721ff, #21d4fd, #2af598)
 
 .navbar-brand
+  background: linear-gradient(-45deg, #b721ff, #21d4fd, #2af598)
+  +vendor-prefix('background-clip', 'text')
+  +vendor-prefix('text-fill-color', 'transparent')
   font-size: 1rem
   .logo1
     font-weight: 900
   .logo2
-    font-weight: 300
+    font-weight: 900
 
 .container-menu-bar
   position: relative
