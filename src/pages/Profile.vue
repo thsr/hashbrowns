@@ -11,7 +11,7 @@
             <span>Sign out of the current session on the current device</span>
     </div>
     <div class="col-3 col-md-2 d-flex align-items-center justify-content-end">
-            <a href="javascript:;" class="btn btn-outline-primary">Sign out</a>
+            <router-link :to="{ path: '/signout' }" class="btn btn-outline-primary">Sign out</router-link>
     </div>
 
 
