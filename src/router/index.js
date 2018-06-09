@@ -34,6 +34,10 @@ let router = new Router({
     },
     {
       path: '/auth',
+      redirect: '/auth/email'
+    },
+    {
+      path: '/auth/:urlStep',
       component: Auth
     },
     {

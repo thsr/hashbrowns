@@ -6,7 +6,7 @@
 
   <transition name="fade-slide-y" mode="out-in" >
 
-        <div v-if="currentStep == 1" :key="'currentStep'+currentStep" class="col-md-6 text-center">
+        <div v-if="currentStep == 'email'" :key="'currentStep'+currentStep" class="col-md-6 text-center">
           <h2 class="lead mb-3">
             <span v-if="hasTooManySearches">
               <strong>You've made 3 hashtag searches.</strong><br>
@@ -17,12 +17,12 @@
               Log in or create an account.
             </span>
           </h2>
-          <form class="form-email" @submit.prevent="checkIfEmailExists">
+          <form class="form" @submit.prevent="checkIfEmailExists">
             <div class="form-group">
               <input type="email" class="form-control" id="email1" placeholder="Email address" required
                 ref="step1"
                 v-model="email"
-                v-focus="currentStep == 1">
+                :autofocus="currentStep == 'email'">
             </div>
             <button type="submit" class="btn btn-primary">Next</button>
           </form>
@@ -33,39 +33,64 @@
 
 
 
-        <div v-if="currentStep == 2" :key="'currentStep'+currentStep" class="col-md-6 text-center">
+        <div v-if="currentStep == 'signin'" :key="'currentStep'+currentStep" class="col-md-6 text-center">
           <h2 class="lead mb-3">
             <strong>Welcome back!</strong><br>
             Enter your password.
           </h2>
-          <form class="form-signin" @submit.prevent="signIn">
-
+          <form class="form" @submit.prevent="signIn">
               <div class="form-group">
-                <input type="email" class="form-control" id="email2" placeholder="Email address" readonly 
-                  v-model="email">
+                <input type="email" class="form-control" id="email2" placeholder="Email address" readonly
+                  v-model="email"
+                  >
               </div>
               <div class="form-group">
                 <input type="password" class="form-control" id="password2" placeholder="Password" aria-describedby="forgotPassword" required
                   ref="step2"
                   v-model="password"
-                  v-focus="currentStep == 2">
+                  v-focus="currentStep == 'signin'"
+                  >
                 <small id="forgotPassword" class="form-text text-muted"><a href="javascript:;" @click="goToStep4">Forgot password?</a></small>
               </div>
               <button type="button" class="btn btn-secondary mr-3" @click.prevent="goToStep1">Back</button>
               <button type="submit" class="btn btn-primary">Log In</button>
             </form>
           
-          <br>Step 2/2
+          <br><span>Step 2/2</span>
         </div>
 
 
 
-        <div v-if="currentStep == 3" :key="'currentStep'+currentStep" class="col-md-6 text-center">
+
+
+        <div v-if="currentStep == 'reauth'" :key="'currentStep'+currentStep" class="col-md-6 text-center">
+          <h2 class="lead mb-3">
+            <strong>Please re-authenticate.</strong><br>
+            Enter your email and password.
+          </h2>
+          <form class="form" @submit.prevent="signIn">
+              <div class="form-group">
+                <input type="email" class="form-control" id="email2" placeholder="Email address"
+                  v-model="email"
+                  :autofocus="currentStep == 'reauth'">
+              </div>
+              <div class="form-group">
+                <input type="password" class="form-control" id="password2" placeholder="Password" aria-describedby="forgotPassword" required
+                  ref="step2"
+                  v-model="password">
+              </div>
+              <button type="submit" class="btn btn-primary">Re-authenticate</button>
+            </form>
+        </div>
+
+
+
+        <div v-if="currentStep == 'signup'" :key="'currentStep'+currentStep" class="col-md-6 text-center">
           <h2 class="lead mb-3">
             <strong>Welcome! Create a new account.</strong><br>
             Choose a password.
           </h2>
-          <form class="form-signup" @submit.prevent="signUp">
+          <form class="form" @submit.prevent="signUp">
 
             <div class="form-group">
               <input type="email" class="form-control" id="email3" placeholder="Email address" readonly
@@ -75,24 +100,24 @@
               <input type="password" class="form-control" id="password3" placeholder="Password" required
                 ref="step3"
                 v-model="password"
-                v-focus="currentStep == 3">
+                v-focus="currentStep == 'signup'">
             </div>
             <button type="button" class="btn btn-secondary mr-3" @click.prevent="goToStep1">Back</button>
             <button type="submit" class="btn btn-primary">Sign Up</button>
           </form>
           
-          <br>Step 2/2
+          <br><span>Step 2/2</span>
         </div>
 
 
 
 
-        <div v-if="currentStep == 4" :key="'currentStep'+currentStep" class="col-md-6 text-center">
+        <div v-if="currentStep == 'reset'" :key="'currentStep'+currentStep" class="col-md-6 text-center">
           <h2 class="lead mb-3">
             <strong>Reset your password.</strong><br>
             You will receive an email with a&nbsp;reset&nbsp;link.
           </h2>
-          <form class="form-signup" @submit.prevent="resetPassword">
+          <form class="form" @submit.prevent="resetPassword">
             <div class="form-group">
               <input type="email" class="form-control" id="email4" placeholder="Email address" required
                 ref="step4"
@@ -109,111 +134,29 @@
 </div>
 
 
-<!-- 
-<div class="container">
-  <div class="auth text-center col-md-4 offset-md-4">
-  
-
-
-<transition name="fade-slide-y" mode="out-in" :key="'currentstep'+currentStep">
-<div>
-  <form class="form-email" @submit.prevent="checkIfEmailExists" >
-    <p class="lead text-center">Log In or Sign Up</p>
-
-    <div class="form-group">
-      <input type="email" class="form-control" id="email1" placeholder="Email address" required
-        ref="step1"
-        v-model="email"
-        v-focus="currentStep == 1">
-    </div>
-    <button type="submit" class="btn btn-primary">Next</button>
-  </form>
-</div>
-
-<div v-if="currentStep == 2">
-  <form class="form-signin" @submit.prevent="signIn">
-    <p class="lead text-center">Welcome back!</p>
-
-    <div class="form-group">
-      <input type="email" class="form-control" id="email2" placeholder="Email address" readonly 
-        v-model="email">
-    </div>
-    <div class="form-group">
-      <input type="password" class="form-control" id="password2" placeholder="Password" aria-describedby="forgotPassword" required
-        ref="step2"
-        v-model="password"
-        v-focus="currentStep == 2">
-      <small id="forgotPassword" class="form-text text-muted"><a href="javascript:;" @click="goToStep4">Forgot password?</a></small>
-    </div>
-    <button type="button" class="btn btn-secondary mr-3" @click.prevent="goToStep1">Back</button>
-    <button type="submit" class="btn btn-primary">Log In</button>
-  </form>
-</div>
-
-<div v-if="currentStep == 3">
-  <form class="form-signup" @submit.prevent="signUp">
-    <p class="lead text-center">Create a new account</p>
-
-    <div class="form-group">
-      <input type="email" class="form-control" id="email3" placeholder="Email address" readonly
-        v-model="email">
-    </div>
-    <div class="form-group">
-      <input type="password" class="form-control" id="password3" placeholder="Password" required
-        ref="step3"
-        v-model="password"
-        v-focus="currentStep == 3">
-    </div>
-    <button type="button" class="btn btn-secondary mr-3" @click.prevent="goToStep1">Back</button>
-    <button type="submit" class="btn btn-primary">Sign Up</button>
-  </form>
-</div>
-
-<div v-if="currentStep == 4">
-  <form class="form-signup" @submit.prevent="resetPassword">
-    <p class="lead text-center">Reset your password</p>
-
-    <div class="form-group">
-      <input type="email" class="form-control" id="email4" placeholder="Email address" required
-        ref="step4"
-        v-model="emailReset">
-    </div>
-    <button type="button" class="btn btn-secondary mr-3" @click.prevent="goToStep1">Back</button>
-    <button type="submit" class="btn btn-primary">Reset your password</button>
-  </form>
-</div>
-
-</transition>
-
-
-<br>
-<br>
-<br>
-  
-<small class="text-muted">Test account:<br>
-  <code>abc@gmail.com</code><br>
-  <code>abc123</code></small>
-
-
-  </div>
-</div> -->
 </template>
 
 <script>
 import firebase from 'firebase'
 import { mixin as focusMixin }  from 'vue-focus'
+
 export default {
   name: 'auth',
   mixins: [ focusMixin ],
+  beforeRouteEnter (to, from, next) {
+    if (['email','signin','reauth','signup','reset'].indexOf(to.params.urlStep) > -1) {
+      next()
+    }
+    else {
+      next('/auth/email')
+    }
+  },
   data: function() {
     return {
-      show: 1,
-      currentStep: 1,
-      focused: 1,
+      currentStep: this.$route.params.urlStep,
       email: '',
       password: '',
       emailReset: '',
-      resetEmailSentCountdown: 0
     }
   },
   computed: {
@@ -227,9 +170,9 @@ export default {
       firebase.auth().fetchSignInMethodsForEmail(this.email).then( // firebase.auth().fetchProvidersForEmail(this.email).then(
         (res) => {
           if (res.includes('password')) {
-            this.currentStep = 2
+            this.goToStep2()
           } else { 
-            this.currentStep = 3
+            this.goToStep2()
           }
         },
         (err) => {
@@ -240,7 +183,7 @@ export default {
     signIn: function() {
       firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(
         (user) => {
-          this.$router.push('/search')
+          this.$router.push(this.$route.query.redirect || '/search')
         },
         (err) => {
           alert(err.message)
@@ -270,15 +213,23 @@ export default {
       })
     },
     goToStep1: function() {
-      this.currentStep = 1
+      this.$router.push('/auth/email')
+      this.currentStep = 'email'
       this.password = ''
     },
     goToStep2: function() {
-      this.currentStep = 2
+      this.$router.push('/auth/signin')
+      this.currentStep = 'signin'
+      this.password = ''
+    },
+    goToStep3: function() {
+      this.$router.push('/auth/signup')
+      this.currentStep = 'signup'
       this.password = ''
     },
     goToStep4: function() {
-      this.currentStep = 4
+      this.$router.push('/auth/reset')
+      this.currentStep = 'reset'
       this.password = ''
     }
   }
