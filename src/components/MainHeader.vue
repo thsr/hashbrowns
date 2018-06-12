@@ -17,10 +17,17 @@
             <li class="nav-item">
                 <router-link :to="{ path: '/about' }" class="nav-link">About</router-link>
             </li>
-            <li class="nav-item">
+            <li v-if="!user" class="nav-item">
+                <router-link :to="{ path: '/auth/email' }" class="nav-link">Sign In</router-link>
+            </li>
+            <li v-if="user" class="nav-item">
                 <router-link :to="{ path: '/profile' }" class="nav-link">Profile</router-link>
             </li>
+            <li v-if="user" class="nav-item">
+                <a href="javascript:;" @click="logout" class="nav-link">Sign Out</a>
+            </li>
         </ul>
+
     </div>
 </nav>
 
@@ -38,8 +45,21 @@ import firebase from 'firebase'
 export default {
   name: 'main-header',
   data: function () {
-    return {}
+    return {
+      user: null
+    }
   },
+
+  mounted () {
+    firebase.auth().onAuthStateChanged( (user) => {
+      if (user) {
+        this.user = user
+      } else {
+        this.user = null
+      }
+    })
+  },
+
   methods: {
     logout: function() {
       firebase.auth().signOut().then(() => {

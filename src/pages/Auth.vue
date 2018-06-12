@@ -10,11 +10,11 @@
           <h2 class="lead mb-3">
             <span v-if="hasTooManySearches">
               <strong>You've made 3 hashtag searches.</strong><br>
-              Log in or create an account to&nbsp;go&nbsp;unlimited!
+              Sign in or create an account to&nbsp;go&nbsp;unlimited!
             </span>
             <span v-if="!hasTooManySearches">
               <strong>Search unlimited hashtags!</strong><br>
-              Log in or create an account.
+              Sign in or create an account.
             </span>
           </h2>
           <form class="form" @submit.prevent="checkIfEmailExists">

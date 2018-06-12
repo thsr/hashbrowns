@@ -1,51 +1,24 @@
 <template>
 
+
+
 <div class="container container-regular-page">
+<edit-email-modal @emailUpdated="updateEmail" />
+<delete-account-modal />
   <div class="row">
+
     <div class="col-md-6 offset-md-3 mt-5">
             <h2>Profile</h2>
             <hr>
     </div>
 
 
-
     <div class="col-9 col-md-4 offset-md-3">
-            <h5>Sign out</h5>
-            <span>Sign out of the current session on the current device</span>
+            <h4>Your email</h4>
+            <p>{{this.userEmail}}</p>
+            <p><a href="javascript:;" @click="editEmail">Change your email address</a></p>
+
     </div>
-    <div class="col-3 col-md-2 d-flex align-items-center justify-content-end">
-            <router-link :to="{ path: '/signout' }" class="btn btn-outline-primary">Sign out</router-link>
-    </div>
-
-
-
-    <div class="col-md-6 offset-md-3">
-            &nbsp;
-    </div>
-    <div class="col-md-6 offset-md-3 mt-5">
-            <h2>Settings</h2>
-            <hr>
-    </div>
-
-
-
-
-    <div class="col-9 col-md-4 offset-md-3">
-            <h5>Your email</h5>
-            <div class="my-3" v-if="!editingEmail">{{this.user.email}}</div>
-
-            <form v-if="editingEmail" class="form-inline" @submit.prevent="saveEmailEdit">
-            <input type="email" class="form-control m-0" id="email1" placeholder="Email address" required
-              ref="step1"
-              v-model="editedEmail"
-              v-focus="editingEmail">
-          </form>
-    </div>
-    <div class="col-3 col-md-2 d-flex align-items-center justify-content-end">
-            <a v-if="!editingEmail" href="javascript:;" @click="editEmail" class="btn btn-outline-primary">Edit email</a>
-            <a v-if="editingEmail" href="javascript:;" @click="saveEmailEdit" class="btn btn-primary">Save <i v-if="savingEmail" class="fa fa-circle-o-notch fa-spin"></i></a>
-    </div>
-
 
 
 
@@ -58,12 +31,13 @@
 
 
     <div class="col-9 col-md-4 offset-md-3">
-            <h5>Your password</h5>
-            <span>&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</span>
+            <h4>Your password</h4>
+            <p>&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</p>
+            <p><a href="javascript:;" @click="resetPassword">Change your password</a></p>
     </div>
-    <div class="col-3 col-md-2 d-flex align-items-center justify-content-end">
+<!--     <div class="col-3 col-md-2 d-flex align-items-center justify-content-end">
             <a href="javascript:;" @click="resetPassword" class="btn btn-outline-primary">Change password</a>
-    </div>
+    </div> -->
 
 
 
@@ -71,16 +45,16 @@
 
 
  
-    <div class="col-md-6 offset-md-3"> 
-            <br><br><br><hr>
+    <div class="col-md-6 offset-md-3">
+            <hr>
     </div>
 
 
 
     <div class="col-md-6 offset-md-3">
-            <h5>Delete account</h5>
+            <h4>Delete account</h4>
             <p>Permanently delete your account and all of your content</p>
-            <p><a href="javascript:;" @click="resetPassword">Delete account</a></p>
+            <p><a href="javascript:;" @click="deleteAccount">Delete account</a></p>
     </div>
 
 
@@ -95,62 +69,67 @@
 import firebase from 'firebase'
 import { mixin as focusMixin }  from 'vue-focus'
 
+import EditEmailModal from './../components/profile/EditEmailModal.vue'
+import DeleteAccountModal from './../components/profile/DeleteAccountModal.vue'
+
 export default {
   name: 'profile',
   mixins: [ focusMixin ],
+
+  components: {
+    EditEmailModal,
+    DeleteAccountModal
+  },
 
   data: function() {
     return {
       editingEmail: this.$route.query.editingEmail || false,
       editedEmail: '',
+      userEmail: '',
       savingEmail: false,
       user: {}
     }
   },
 
-  beforeMount () {
-    this.user = firebase.auth().currentUser
+  created () {
+    firebase.auth().onAuthStateChanged( (user) => {
+      if (user) {
+        this.user = user
+        this.userEmail = user.email
+      } else {
+        this.user = null
+      }
+    })
   },
+
 
   methods: {
 
-    resetPassword: function() {
-      // alert("reset pw disabled")
-      // return
-      firebase.auth().sendPasswordResetEmail(this.user.email).then(() => {
-        alert("An email has been sent to you. Use the link in your email to change your password.")
-      }).catch(function(err) {
-          alert(err.message)
-      })
+    resetPassword: async function() {
+      try {
+        const sendPass = await firebase.auth().sendPasswordResetEmail(this.user.email)
+        alert('An email has been sent to you. Use the link in your email to change your password.')
+      } catch (err) {
+        alert(err.message)
+      }
     },
 
     editEmail: function() {
-      // this.$router.push('/auth/reauth?redirect=/profile')
-      this.editingEmail = true
-      this.editedEmail = firebase.auth().currentUser.email
+      this.$modal.show('edit-email-modal')
+    },
+    updateEmail: function(newEmail) {
+      this.userEmail = newEmail
     },
 
-    saveEmailEdit: function() {
-      this.savingEmail = true
+    deleteAccount: function() {
+      this.$modal.show('delete-account-modal')
+    },
 
-      firebase.auth().currentUser.updateEmail(this.editedEmail).then( () => {
-        this.editingEmail = false
-        this.savingEmail = false
-      }).catch( (err) => {
-        // err.code == 'auth/requires-recent-login'
-        if (err.code == 'auth/requires-recent-login') {
-          this.$router.push('/auth/reauth?redirect=/profile?editingEmail=1')
-        } else {
-          alert(err.message)
-        }
-        this.savingEmail = false
-      })
-    }
   }
 }
 </script>
 
 <style scoped lang="sass">
-h5
+h4
   font-weight: bold
 </style>

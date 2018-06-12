@@ -62,6 +62,20 @@ Vue.use(VueProgressBar, options)
 /*=====  End of progressbar stuff  ======*/
 
 
+
+
+/*==========================================
+=            vuemodal            =
+==========================================*/
+import vmodal from 'vue-js-modal'
+Vue.use(vmodal)
+
+/*=====  End of vuemodal  ======*/
+
+
+
+
+
 /*==========================================
 =            vueclipboard stuff            =
 ==========================================*/

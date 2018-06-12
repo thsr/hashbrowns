@@ -253,5 +253,13 @@ h1.display-5.hero
 nav
   z-index: 99
 
+.v--modal
+  box-shadow: 0px 2px 20px 0px rgba(0,0,0,0.1)
+  max-width: 100vw !important
+
+.v--modal-overlay
+  background: rgba(255,255,255,0.8)
+
+
 
 </style>
