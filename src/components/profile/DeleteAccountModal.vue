@@ -73,4 +73,7 @@ export default {
 <style scoped lang="sass">
 .form
   text-align: center
+
+input
+  text-align: center
 </style>
