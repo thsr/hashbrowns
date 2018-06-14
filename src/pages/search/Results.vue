@@ -137,14 +137,7 @@ export default {
   },
 
   mounted () {
-
     this.fetchData()
-
-    // setTimeout( () => {
-    //     this.searchResult.data = this.searchResult.data.map( o => {
-    //     return { ...o, displayTest: '12,345' } 
-    //   })
-    // }, 5000)
   },
 
   watch: {

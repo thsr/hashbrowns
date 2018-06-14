@@ -21,9 +21,11 @@ export default {
   },
   methods: {
     logout: function() {
+      this.$Progress.start()
       firebase.auth().signOut().then(() => {
-        this.$router.push('/search')
+        this.$router.push( {name: 'Search' })
       })
+      this.$Progress.finish()
     }
   },
   mounted () {

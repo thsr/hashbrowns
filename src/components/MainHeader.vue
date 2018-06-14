@@ -12,16 +12,16 @@
     <div class="collapse navbar-collapse justify-content-md-end" id="navbarNav">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <router-link :to="{ path: '/search' }" class="nav-link">Search</router-link>
+                <router-link :to="{ name: 'Search' }" class="nav-link">Search</router-link>
             </li>
             <li class="nav-item">
-                <router-link :to="{ path: '/about' }" class="nav-link">About</router-link>
+                <router-link :to="{ name: 'About' }" class="nav-link">About</router-link>
             </li>
             <li v-if="!user" class="nav-item">
-                <router-link :to="{ path: '/auth/email' }" class="nav-link">Sign In</router-link>
+                <router-link :to="{ name: 'Signup' }" class="nav-link">Join or Sign In</router-link>
             </li>
             <li v-if="user" class="nav-item">
-                <router-link :to="{ path: '/profile' }" class="nav-link">Profile</router-link>
+                <router-link :to="{ name: 'Profile' }" class="nav-link">Profile</router-link>
             </li>
             <li v-if="user" class="nav-item">
                 <a href="javascript:;" @click="logout" class="nav-link">Sign Out</a>
@@ -62,14 +62,11 @@ export default {
 
   methods: {
     logout: function() {
+      this.$Progress.start()
       firebase.auth().signOut().then(() => {
         this.$router.push('/search')
       })
-    }
-  },
-  computed: {
-    abc: function() {
-      return firebase.auth().currentUser
+      this.$Progress.finish()
     }
   },
 }
