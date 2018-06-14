@@ -172,7 +172,7 @@ export default {
           if (res.includes('password')) {
             this.goToStep2()
           } else { 
-            this.goToStep2()
+            this.goToStep3()
           }
         },
         (err) => {
