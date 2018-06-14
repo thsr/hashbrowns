@@ -65,8 +65,16 @@ export default {
       try {
         const signedUpUser = await firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
         localStorage.setItem("hb_signedinbefore", 1)
+
+        dataLayer.push({
+          event: 'sign_up'
+        })
+
         return this.$router.push(this.$route.query.redirect || '/search')
       } catch(err) {
+        dataLayer.push({
+          event: 'sign_up_error', error_code: err.code, error_message: err.message
+        })
         alert(err.message)
       }
     },

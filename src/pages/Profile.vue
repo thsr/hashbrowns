@@ -108,8 +108,14 @@ export default {
     resetPassword: async function() {
       try {
         const sendPass = await firebase.auth().sendPasswordResetEmail(this.user.email)
+        dataLayer.push({
+          event: 'reset_password'
+        })
         alert('An email has been sent to you. Use the link in your email to change your password.')
       } catch (err) {
+        dataLayer.push({
+          event: 'reset_password_error', error_code: err.code, error_message: err.message
+        })
         alert(err.message)
       }
     },

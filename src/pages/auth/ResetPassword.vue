@@ -42,8 +42,14 @@ export default {
       try {
         const sendResetEmail = await firebase.auth().sendPasswordResetEmail(this.email)
         alert("Email sent. Use the link in your email to reset your password.")
+        dataLayer.push({
+          event: 'reset_password'
+        })
         this.$router.push( { name: 'Signin' })
       } catch(err) {
+        dataLayer.push({
+          event: 'reset_password_error', error_code: err.code, error_message: err.message
+        })
         alert(err.message)
       }
     },

@@ -23,7 +23,7 @@
               <button type="submit" class="btn btn-primary">Log In</button>
             </form>
           
-          <br>No account? <u><strong><a href="javscript:;" @click="goToSignUp">Create one</a></strong></u>
+          <br>No account? <u><strong><a href="javscript:;" @click.prevent="goToSignUp">Create one</a></strong></u>
         </div>
 
 
@@ -54,8 +54,16 @@ export default {
 
         const signedInUser = await firebase.auth().signInWithEmailAndPassword(this.email, this.password)
         localStorage.setItem("hb_signedinbefore", 1)
+
+        dataLayer.push({
+          event: 'sign_in'
+        })
+
         return this.$router.push(this.$route.query.redirect || '/search')
       } catch(err) {
+        dataLayer.push({
+          event: 'sign_in_error', error_code: err.code, error_message: err.message
+        })
         alert(err.message)
       }
     },

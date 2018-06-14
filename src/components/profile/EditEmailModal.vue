@@ -63,9 +63,14 @@ export default {
         const updateEmail = await user.updateEmail(this.updatedEmail)
         this.$emit('emailUpdated',this.updatedEmail)
         this.confirmPassword = ''
-
+        dataLayer.push({
+          event: 'account_email_update'
+        })
         this.$modal.hide('edit-email-modal')
       } catch (err) {
+        dataLayer.push({
+          event: 'account_email_update_error', error_code: err.code, error_message: err.message
+        })
         alert(err.message)
       }
 

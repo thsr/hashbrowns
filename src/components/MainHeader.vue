@@ -66,6 +66,9 @@ export default {
       firebase.auth().signOut().then(() => {
         this.$router.push('/search')
       })
+      dataLayer.push({
+        event: 'sign_out'
+      })
       this.$Progress.finish()
     }
   },

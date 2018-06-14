@@ -59,9 +59,15 @@ export default {
         const credentials = firebase.auth.EmailAuthProvider.credential( this.user.email, this.confirmPassword )
         const reAuth = await user.reauthenticateAndRetrieveDataWithCredential(credentials)
         const deleteAccount = await user.delete()
+        dataLayer.push({
+          event: 'account_delete'
+        })
         this.$modal.hide('delete-account-modal')
         this.$router.push('/')
       } catch (err) {
+        dataLayer.push({
+          event: 'account_delete_error', error_code: err.code, error_message: err.message
+        })
         alert(err.message)
       }
 
