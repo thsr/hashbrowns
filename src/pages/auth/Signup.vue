@@ -75,7 +75,7 @@ export default {
         localStorage.setItem("hb_signedinbefore", 1)
 
         dataLayer.push({
-          event: 'sign_up'
+          event: 'sign_up', user_id: signedUpUser.user.uid, email: signedUpUser.user.email
         })
 
         return this.$router.push(this.$route.query.redirect || '/search')

@@ -54,9 +54,9 @@ export default {
 
         const signedInUser = await firebase.auth().signInWithEmailAndPassword(this.email, this.password)
         localStorage.setItem("hb_signedinbefore", 1)
-
+        
         dataLayer.push({
-          event: 'sign_in'
+          event: 'sign_in', user_id: signedInUser.user.uid, email: signedInUser.user.email
         })
 
         return this.$router.push(this.$route.query.redirect || '/search')
