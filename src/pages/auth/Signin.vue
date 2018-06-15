@@ -20,7 +20,7 @@
                   v-model="password">
                 <small id="forgotPassword" class="form-text text-muted"><router-link :to="{ name: 'ResetPassword' }">Forgot password?</router-link></small>
               </div>
-              <button type="submit" class="btn btn-primary">Log In</button>
+              <button type="submit" class="btn btn-primary">Sign In</button>
             </form>
           
           <br>No account? <u><strong><a href="javscript:;" @click.prevent="goToSignUp">Create one</a></strong></u>

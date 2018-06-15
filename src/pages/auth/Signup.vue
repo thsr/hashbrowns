@@ -22,14 +22,19 @@
                 v-model="email">
             </div>
             <div class="form-group">
-              <input type="password" class="form-control" id="password" placeholder="Password" required
+              <input type="password" class="form-control" id="password" placeholder="Choose a password" required
                 ref="password"
                 v-model="password">
+            </div>
+            <div class="form-group">
+              <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm password" required
+                ref="confirmPassword"
+                v-model="confirmPassword">
             </div>
             <button type="submit" class="btn btn-primary">Sign Up</button>
           </form>
           
-          <br>Already have an account? <u><strong><router-link :to="{ name: 'Signin' }">Sign In</router-link></strong></u>
+          <br>Already have an account? <u><strong><router-link :to="{ name: 'Signin' }">Sign in</router-link></strong></u>
         </div>
 
 
@@ -49,6 +54,7 @@ export default {
     return {
       email: '',
       password: '',
+      confirmPassword: ''
     }
   },
   // beforeCreate () {
@@ -63,6 +69,8 @@ export default {
   methods: {
     signUp: async function() {
       try {
+        if (this.password !== this.confirmPassword) return alert('Passwords aren\'t identical')
+
         const signedUpUser = await firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
         localStorage.setItem("hb_signedinbefore", 1)
 
