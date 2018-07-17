@@ -135,6 +135,7 @@ $border-radius: .33rem
 .fade-slide-y-enter, .fade-slide-y-leave-to
   opacity: 0
   transform: translateY(10px)
+  // transform: scale(0.95, 0.95)
 
 html
   background-color: #fff
