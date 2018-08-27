@@ -243,7 +243,7 @@ export default {
           dataLayer.push({
             event: 'hashtag_search_error',
             tag_name: this.$route.params.tag,
-            error_response: error.response.data.toString()
+            error_message: error.response.data.toString()
             
           })
         })
