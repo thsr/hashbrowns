@@ -15,7 +15,7 @@ import About from '@/pages/About.vue'
 import Privacy from '@/pages/Privacy.vue'
 
 
-import firebase from 'firebase'
+import firebase from 'firebase/app'
 
 Vue.use(Router)
 

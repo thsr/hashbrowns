@@ -30,7 +30,7 @@ To confirm deletion, type your password below:
 </template>
 
 <script>
-import firebase from 'firebase'
+import firebase from 'firebase/app'
 
 export default {
   name: 'delete-account-modal',

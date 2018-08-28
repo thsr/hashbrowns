@@ -66,7 +66,7 @@
 </template>
 
 <script>
-import firebase from 'firebase'
+import firebase from 'firebase/app'
 import { mixin as focusMixin }  from 'vue-focus'
 
 import EditEmailModal from './../components/profile/EditEmailModal.vue'

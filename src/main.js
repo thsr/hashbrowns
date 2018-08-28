@@ -10,7 +10,7 @@ import router from './router'
 =            firebase stuff            =
 ======================================*/
 
-import firebase from 'firebase'
+import firebase from 'firebase/app'
 import VueFire from 'vuefire'
 
 Vue.use(VueFire)

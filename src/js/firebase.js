@@ -1,4 +1,6 @@
-import firebase from 'firebase'
+import firebase from 'firebase/app'
+// import 'firebase/database'
+import 'firebase/auth'
 
 var config = {
   apiKey: process.env.FIREBASE_API_KEY,
@@ -11,4 +13,4 @@ var config = {
 
 export var firebaseApp = firebase.initializeApp(config)
 
-export var db = firebaseApp.database()
+// export var db = firebaseApp.database()
