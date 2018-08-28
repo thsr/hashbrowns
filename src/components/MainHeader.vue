@@ -54,6 +54,11 @@ export default {
     firebase.auth().onAuthStateChanged( (user) => {
       if (user) {
         this.user = user
+        dataLayer.push({
+          event: 'auth_changed',
+          email: user.email,
+          user_id: user.uid
+        })
       } else {
         this.user = null
       }
