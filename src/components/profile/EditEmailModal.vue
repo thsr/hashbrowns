@@ -12,7 +12,7 @@
             <h5>Change your email address</h5>
             <p>Please type your new email address and confirm your password below:</p>
             <div class="form-group">
-              <input type="email" class="form-control" id="email2" placeholder="Email address" autofocus
+              <input type="email" class="form-control" id="email2" placeholder="New email address" autofocus
                 v-model="updatedEmail">
             </div>
             <div class="form-group">
@@ -47,7 +47,7 @@ export default {
 
   created () {
     this.user = firebase.auth().currentUser
-    this.updatedEmail = firebase.auth().currentUser.email
+    this.updatedEmail = ''//firebase.auth().currentUser.email
   },
 
   computed: {
@@ -64,7 +64,8 @@ export default {
         this.$emit('emailUpdated',this.updatedEmail)
         this.confirmPassword = ''
         dataLayer.push({
-          event: 'account_email_update'
+          event: 'account_email_update',
+          email: this.updatedEmail
         })
         this.$modal.hide('edit-email-modal')
       } catch (err) {
