@@ -21,14 +21,6 @@
 
     <link rel="icon" type="image/x-icon" href="/static/icon3.jpg"/>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
-
-    <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script> 
-    
-
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -37,16 +29,90 @@
     })(window,document,'script','dataLayer','GTM-P5PLSL3');</script>
     <!-- End Google Tag Manager -->
 
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;900&amp;display=swap" rel="stylesheet">
+
+    <style type="text/css">
+      html, body, div, img, ul, li {
+          border: 0;
+          margin: 0;
+          padding: 0;
+      }
+      html, body {
+          font-family: Inter, Helvetica, Arial, sans-serif;
+          font-weight: 400;
+          font-size: 18px;
+          line-height: 1.25;
+          color:#444;
+          padding: 0;
+          margin: 0;
+          width: 100vw;
+          min-height: 100vh;
+      }
+      .container {
+          display: grid;
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 100vw;
+          height: 80vh;
+      }
+      .header {
+        margin: 1.5rem;
+        grid-column: 1 / 2;
+        grid-row: 1 / 2;
+        justify-self: left;
+        align-self: top;
+      }
+      .header h1 {
+        font-size: 1rem;
+        margin: 0;
+        padding: 0;
+        font-weight: 900;
+        background: -webkit-linear-gradient(-45deg, #b721ff, #21d4fd, #2af598);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .center {
+          margin: 1.5rem;
+          grid-column: 1 / 2;
+          grid-row: 1 / 2;
+          justify-self: center;
+          align-self: center;
+          max-width: 400px;
+      }
+      p.big {
+        font-size: 2rem;
+      }
+      h2 {
+          font-weight: 300;
+          font-size: 1.5rem;
+      }
+      a {
+          color: #444;
+          text-decoration: underline;
+      }
+      a:hover {
+          color: #444;
+          text-decoration: none;
+      }
+    </style>
+
   </head>
   <body>
 
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P5PLSL3"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
-    
-    <div id="app"></div>
-    <!-- built files will be auto injected -->
-    
+    <div class="container">
+      <div class="header">
+          <h1>Tag Chicken</h1>
+      </div>
+      <div class="center">
+          <p class="big">👋</p>
+          <h2>So long, Tag Chicken!</h2>
+          <p>We have decided to shut down on Dec 1st, 2019 due to important changes to the Instagram API and the way it handles data.</p>
+          <p>We hope to bring you more hashtag ideas in the future.</p>
+          <p>Thank you for making Tag Chicken a part of how you use Instagram.</p>
+          <p><a href="http://github.com/thsr" target="_blank" rel="noopener noreferrer">github.com/thsr</a></p>
+      </div>
+    </div>
+
   </body>
 </html>
